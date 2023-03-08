@@ -1,0 +1,106 @@
+/* Palette colours: 22223b, 4a4e69, f2e9e4, 9a8c98, c9ada7*/
+:root {
+    --text-primary: #f2e9e4;
+    --bg: #22223b;
+    --bg-secondary: #9a8c98;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: mont;
+    src: url(../Fonts/Montserrat-VariableFont_wght.ttf);
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg);
+    color: var(--text-primary);
+    font-family: mont;
+}
+/* Header */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 9%;
+}
+
+.logo {
+    font-size: larger;
+    font-weight: bold;
+    
+}
+
+.navbar {
+    overflow: hidden;
+    padding: 15px;
+}
+
+.navbar ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navbar li {
+    list-style: none;
+}
+
+/* Style of links in navigation bar */
+.navbar li a {
+    color: var(--text-primary);
+    text-decoration: none; /* Property removes the underline */
+    font-size: 20px;
+    padding: 14px 16px;
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    display: block;
+}
+
+.navbar a:hover {
+    background-color: var(--text-primary);
+    color: #22223b;
+}
+
+.navbar a.active {
+    background-color: var(--text-primary);
+    color: #22223b;
+}
+
+/* --- Intro --- */
+.intro {
+    margin: 9%;
+    font-size: large;
+    display: flex;
+    justify-content: center;
+}
+
+.intro .container {
+    text-align: left;
+}
+
+.intro button {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: large;
+    cursor: pointer;
+    border: none;
+    width: 125px;
+    height: 50px;
+    border-radius: 100px;
+    margin: 5px;
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+}
+
+.intro button:hover {
+    background-color: #4a4e69;
+    color: #fff6f1;
+}
+
+.intro button:active {
+    background-color: #fff6f1;
+    color: #4a4e69;
+}
