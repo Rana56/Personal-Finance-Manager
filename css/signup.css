@@ -21,6 +21,7 @@ body{
   color: var(--text-primary);
   font-family: mont;
 }
+
 /* Header */
 header {
   display: flex;
@@ -74,9 +75,10 @@ h2 {
   color: #22223b;
 }
 
-.login-page {
+/* Sign-up */
+.signup-page {
   width: 360px;
-  padding: 8% 0 0;
+  padding: 5% 0 0;
   margin: auto;
 }
 .form {
