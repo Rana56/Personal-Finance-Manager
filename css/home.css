@@ -34,7 +34,6 @@ header {
 .logo {
     font-size: larger;
     font-weight: bold;
-    
 }
 
 .navbar {
@@ -50,6 +49,8 @@ header {
 
 .navbar li {
     list-style: none;
+    border-radius: 100px;
+    margin-inline: 5px;
 }
 
 /* Style of links in navigation bar */
@@ -60,16 +61,45 @@ header {
     padding: 14px 16px;
     transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
     display: block;
+    border-radius: 100px;
 }
 
 .navbar a:hover {
     background-color: var(--text-primary);
     color: #22223b;
+    border-radius: 100px;
 }
 
 .navbar a.active {
     background-color: var(--text-primary);
     color: #22223b;
+    border-radius: 100px;
+}
+
+#logout {
+    color: var(--text-primary);
+    background-color: #ab6060;
+    text-decoration: none; /* Property removes the underline */
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    display: block;
+}
+
+#login {
+    color: var(--text-secondary);
+    background-color: var(--bg-secondary);
+    text-decoration: none; /* Property removes the underline */
+    font-size: 20px;
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    display: block;
+}
+
+#register {
+    color: var(--text-primary);
+    background-color: #ab6060;
+    text-decoration: none; /* Property removes the underline */
+    font-size: 20px;
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    display: block;
 }
 
 /* --- Intro --- */
@@ -115,6 +145,98 @@ header {
 }
 
 /* --- Main Content --- */
+.slideshow {
+    position: relative;
+    color: var(--text-secondary);
+    font-size: large;
+}
+
+.slides {
+    /* --- hides slides --- */
+    display: none;
+    padding-top: 7%;
+    padding-bottom: 2%;
+    text-align: center;
+}
+
+.slides .container {
+    display: flex;
+    align-items: center;
+}
+
+.slides .container img{
+    width: 30%;
+    height: auto;
+    margin-right: 20px;
+    margin-left: 10%;
+}
+
+.slide-text {
+    flex-grow: 1;
+}
+
+.slide-text h2{
+    margin-top: 0;
+}
+
+@media (max-width: 800px) {
+    .slides .container {
+      flex-direction: column;
+    }
+  
+    .slides .container img {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+  }
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -30px;
+    padding: 16px;
+    color: #888;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+.next {
+    position: absolute;
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+    background-color: #928d8a;
+    color: var(--text-secondary);
+}
+
+.dots-box {
+    text-align: center;
+    padding: 15px;
+}
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+    background-color: #717171;
+}
+
+
 .homeContent {
     padding-top: 8%;
     padding-bottom: 8%;

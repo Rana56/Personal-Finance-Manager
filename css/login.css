@@ -52,6 +52,8 @@ h2 {
 
 .navbar li {
   list-style: none;
+  border-radius: 100px;
+  margin-inline: 5px;
 }
 
 /* Style of links in navigation bar */
@@ -62,16 +64,45 @@ h2 {
   padding: 14px 16px;
   transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
   display: block;
+  border-radius: 100px;
 }
 
 .navbar a:hover {
   background-color: var(--text-primary);
   color: #22223b;
+  border-radius: 100px;
 }
 
 .navbar a.active {
   background-color: var(--text-primary);
   color: #22223b;
+  border-radius: 100px;
+}
+
+#logout {
+  color: var(--text-primary);
+  background-color: #ab6060;
+  text-decoration: none; /* Property removes the underline */
+  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  display: block;
+}
+
+#login {
+  color: var(--text-secondary);
+  background-color: var(--bg-secondary);
+  text-decoration: none; /* Property removes the underline */
+  font-size: 20px;
+  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  display: block;
+}
+
+#register {
+  color: var(--text-primary);
+  background-color: #ab6060;
+  text-decoration: none; /* Property removes the underline */
+  font-size: 20px;
+  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  display: block;
 }
 
 /* Login */
@@ -159,6 +190,10 @@ h2 {
 }
 .container .info span .fa {
   color: #EF3B3A;
+}
+
+.notification {
+  text-align: center;
 }
 
 /**

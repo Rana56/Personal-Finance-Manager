@@ -1,0 +1,141 @@
+:root {
+    --text-primary: #f2e9e4;
+    --text-secondary: #3B3B22;
+    --bg: #22223b;
+    --bg-secondary: #9a8c98;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: mont;
+    src: url(../Fonts/Montserrat-VariableFont_wght.ttf);
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg);
+    color: var(--text-primary);
+    font-family: mont;
+}
+/* Header */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 9%;
+    background-color: var(--bg);
+}
+
+.logo {
+    font-size: larger;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.navbar {
+    overflow: hidden;
+    padding: 15px;
+}
+
+.navbar ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navbar li {
+    list-style: none;
+    border-radius: 100px;
+    margin-inline: 5px;
+}
+
+/* Style of links in navigation bar */
+.navbar li a {
+    color: var(--text-primary);
+    text-decoration: none; /* Property removes the underline */
+    font-size: 20px;
+    padding: 14px 16px;
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    display: block;
+    border-radius: 100px;
+}
+
+.navbar a:hover {
+    background-color: var(--text-primary);
+    color: #22223b;
+    border-radius: 100px;
+}
+
+.navbar a.active {
+    background-color: var(--text-primary);
+    color: #22223b;
+    border-radius: 100px;
+}
+
+#logout {
+    color: var(--text-primary);
+    background-color: #ab6060;
+    text-decoration: none; /* Property removes the underline */
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    display: block;
+}
+
+#login {
+    color: var(--text-secondary);
+    background-color: var(--bg-secondary);
+    text-decoration: none; /* Property removes the underline */
+    font-size: 20px;
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    display: block;
+}
+
+#register {
+    color: var(--text-primary);
+    background-color: #ab6060;
+    text-decoration: none; /* Property removes the underline */
+    font-size: 20px;
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    display: block;
+}
+
+/* --- Intro --- */
+.intro {
+    padding-top: 8%;
+    padding-bottom: 8%;
+    font-size: large;
+    display: flex;
+    justify-content: center;
+    background-color: var(--bg);
+    border-radius: 0 0 500% 540%/0 0 220% 220%;
+}
+
+.intro .container {
+    text-align: left;
+}
+
+.intro button {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: large;
+    cursor: pointer;
+    border: none;
+    width: 125px;
+    height: 50px;
+    border-radius: 100px;
+    margin-top: 20px;
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+}
+
+.intro button:hover {
+    background-color: #4a4e69;
+    color: #fff6f1;
+}
+
+.intro button:active {
+    background-color: #fff6f1;
+    color: #4a4e69;
+}
