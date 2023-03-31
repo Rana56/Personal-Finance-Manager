@@ -146,7 +146,6 @@ header {
 
 /* --- Main Content --- */
 .slideshow {
-    position: relative;
     color: var(--text-secondary);
     font-size: large;
 }
@@ -172,11 +171,18 @@ header {
 }
 
 .slide-text {
+    text-align: left;
     flex-grow: 1;
+    padding-left: 5%;
 }
 
-.slide-text h2{
+.slide-text h1{
     margin-top: 0;
+    color: var(--bg);
+}
+
+.slide-text p{
+    margin-right: 25%
 }
 
 @media (max-width: 800px) {
@@ -193,7 +199,6 @@ header {
 
 .prev, .next {
     cursor: pointer;
-    position: absolute;
     top: 50%;
     width: auto;
     margin-top: -30px;
@@ -201,14 +206,8 @@ header {
     color: #888;
     font-weight: bold;
     font-size: 20px;
-    border-radius: 0 3px 3px 0;
+    border-radius: 3px 3px 3px 3px;
     user-select: none;
-}
-
-.next {
-    position: absolute;
-    right: 0;
-    border-radius: 3px 0 0 3px;
 }
 
 .prev:hover, .next:hover {
@@ -236,7 +235,6 @@ header {
     background-color: #717171;
 }
 
-
 .homeContent {
     padding-top: 8%;
     padding-bottom: 8%;
@@ -248,6 +246,30 @@ header {
 
 .homeContent .container{
     text-align: center;
+}
+
+.slideshow button {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: large;
+    cursor: pointer;
+    border: none;
+    width: auto;
+    height: 50px;
+    border-radius: 100px;
+    margin-top: 20px;
+    padding-inline: 20px;
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+}
+
+.slideshow  button:hover {
+    background-color: #4a4e69;
+    color: #fff6f1;
+}
+
+.slideshow  button:active {
+    background-color: #fff6f1;
+    color: #4a4e69;
 }
 
 /* --- Footer --- */

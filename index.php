@@ -19,7 +19,7 @@
         <div class="intro">
             <div class="container">
                 <h1 id="typing"></h1>
-                <p>Take Control of Your Fiances, One Click at a Time: Your Personal Finance Manager</p>
+                <p>Take Control of Your Fiances, One Click at a Time: Your Personal Finance Manager.</p>
                 <button>See More</button>
             </div>
         </div>
@@ -30,8 +30,9 @@
                 <div class="container">
                     <img src="Images/budget.png" alt="Image">
                     <div class="slide-text">
-                        <h2>Organise your money</h2>
-                        <p>Improve your savings and set goals to stay on track</p>
+                        <h1>Organise your money</h1>
+                        <p>Improve your savings and set goals to stay on track using a friendly method for managing your finances.</p>
+                        <button onclick="goSignup()">Sign Up</button>
                     </div>
                 </div>
             </div>
@@ -40,8 +41,9 @@
                 <div class="container">
                     <img src="Images/dartboard.png" alt="Image">
                     <div class="slide-text">
-                        <h2>Track your spending habits and budget</h2>
-                        <p>Change your relationship with money using a friendly method for managing your finances</p>
+                        <h1>Track your spending and budget</h1>
+                        <p>Have a look at our savings page on helpful resources and guides to help improve your relationship and habits with money.</p>
+                        <button onclick="goSavings()">Start Saving</button>
                     </div>
                 </div>
             </div>
@@ -50,21 +52,22 @@
                 <div class="container">
                     <img src="Images/wallet.png" alt="Image">
                     <div class="slide-text">
-                        <h2>Save money and get deals</h2>
-                        <p>Track products and get notified when the price reduce</p>
+                        <h1>Save money and get deals</h1>
+                        <p>Don't want to check the price of a product everyday? Track products and get notified when the price reduce.</p>
+                        <button onclick="goTracking()">Start Tracking</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Nav Buttons -->
-            <a class="prev" onclick="slideChange(-1)">&#10094;</a>
-            <a class="next" onclick="slideChange(1)">&#10095;</a>
         </div>
 
         <div class="dots-box">
+            <!-- Nav Buttons -->
+            <a class="prev" onclick="slideChange(-1)">&#10094;</a>
             <span class="dot" onclick="currentSlide(1)"></span>
             <span class="dot" onclick="currentSlide(2)"></span>
             <span class="dot" onclick="currentSlide(3)"></span>
+            <a class="next" onclick="slideChange(1)">&#10095;</a>
         </div>
 
         <div class="homeContent">
@@ -87,4 +90,5 @@
 
     <script src="Scripts/wordType.js"></script>
     <script src="Scripts/slideshow.js"></script>
+    <script src="Scripts/homeButtons.js"></script>
 </html>
