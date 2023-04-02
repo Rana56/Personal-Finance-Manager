@@ -1,12 +1,54 @@
 /* Palette colours: 22223b, 4a4e69, f2e9e4, 9a8c98, c9ada7*/
 :root {
     --text-primary: #f2e9e4;
+    --text-secondary: #3B3B22;
+    --text-3: #dfd7e6;
+
+    --account-bg: #f1f1f1;
     --bg: #22223b;
     --bg-secondary: #9a8c98;
+    --bg-dark: #101042;
+    --bg-light: #e1dde5;
+    --bg-3: #5a5a9c;
+    --sidebar: #e1dde5;
+    --links: #5a5a9c;
+
+    --colour-danger: #e75461;
+    --colour-success: #31ad84;
+    --colour-warning: #f0950e;
+    --colour-info-dark: #39393d;
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 0.8rem;
+    --border-radius-3: 1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 0 2rem 3rem var(--text-3);
+    --alternate-shadow: #1d1d5a;
+}
+
+.dark-theme {
+    --account-bg: #101042;
+    --bg-light: #32366b;
+    --bg: #f2e9e4;
+    --links: #f2e9e4;
+    --colour-info-dark: #f2e9e4;
+
+    --box-shadow: 0 2rem 3rem var(--alternate-shadow);
 }
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    appearance: 0;
+    border: 0;
+    text-decoration: none;
+    list-style: none;
 }
 
 @font-face {
@@ -17,24 +59,37 @@
 body{
     margin: 0;
     padding: 0;
-    background-color: #f1f1f1;
-    color: var(--text-primary);
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--account-bg);
+    color: var(--bg);
     font-family: mont;
+    font-size: 0.88rem;
+    user-select: none;
+    overflow-x: hidden;        /*Changes how content is shown depending it size */ 
 }
 
-/* Header */
+.container {
+    display: grid;
+    width: 96%;
+    margin: 0 auto;
+    gap: 1.8rem;
+    grid-template-columns: 14rem auto 23rem;
+}
+
+/* ---------- Header ---------- */
 header {
-    background-color: var(--bg);
+    background-color: #22223b;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0px 9%;
 }
 
-.logo {
+header .logo p{
     font-size: larger;
     font-weight: bold;
-    
+    color: var(--text-primary);
 }
 
 .navbar {
@@ -101,4 +156,456 @@ header {
     font-size: 20px;
     transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
     display: block;
+}
+
+/* ---------- Base ---------- */
+a {
+    color: var(--bg);
+}
+
+h1 {
+    font-weight: 800;
+    font-size: 1.8rem;
+}
+
+h2 {
+    font-size: 1.4rem;
+}
+
+h3 {
+    font-size: 0.9rem;
+}
+
+h4 {
+    font-size: 0.8rem;
+}
+
+h5 {
+    font-size: 0.77rem;
+}
+
+small {
+    font-size: 0.75rem;
+}
+
+.text-muted{
+    color: var(--colour-info-dark);
+}
+
+p {
+    color: var(--bg);
+}
+
+.danger {
+    color: var(--colour-danger);
+}
+
+.success {
+    color: var(--colour-success);
+}
+
+.warning {
+    color: var(--colour-warning);
+}
+
+aside {
+    height: 100vh;
+}
+
+aside .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.4rem;
+}
+
+aside .logo p{
+    gap: 0.8rem;
+    font-size: larger;
+    font-weight: bold;
+    margin-left: 2rem;
+    display: none;
+}
+
+aside .closeTab {
+    display: none;
+}
+
+/* ---------- Sidebar ----------*/
+
+aside .sidebar {
+    background-color: var(--bg-light);
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    position: relative;
+    top: 2rem;
+    border-radius: 10px;
+}
+
+aside h3 {
+    font-weight: 600;
+}
+
+aside .sidebar a {
+    display: flex;
+    margin-left: 2rem;
+    gap: 1rem;
+    align-items: center;
+    position: relative;
+    height: 3.7rem;
+    transition: all 350ms ease;
+    border-radius: 10px;
+}
+
+aside .sidebar a span {
+    font-size: 1.6rem;
+    transition: all 350ms ease;
+}
+
+aside .sidebar a:last-child{
+    position: absolute;
+    bottom: 2rem;
+    width: 100%;
+}
+
+aside .sidebar a.active {
+    background: #c9c6cc;
+    color: var(--bg-dark);
+    margin-left: 0;
+    border-radius: 10px;
+}
+
+aside .sidebar a.active:before {
+    content: '';
+    width: 6px;
+    height: 100%;
+    background: var(--bg-3);
+    border-radius: 3px;
+}
+
+aside .sidebar a.active span {
+    color: var(--bg-dark);
+    margin-left: calc(1rem - 6px);          /*align with other icons*/
+}
+
+aside .sidebar a:hover {
+    color: var(--bg-dark);
+}
+
+aside .sidebar a:hover span {
+    margin-left: 1rem;
+}
+
+/* ---------- Main ---------- */
+main {
+    margin-top: 1.4rem;
+}
+
+main .date {
+    display: inline-block;
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius-1);
+    margin-top: 1rem;
+    padding: 0.5rem 1.6rem;
+}
+
+main .date input[type='date']{
+    background: transparent;
+    color: var(--bg);
+}
+
+main .insights {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.6rem;
+}
+
+main .insights > div {
+    background: var(--bg-light);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    margin-top: 1rem;
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+}
+
+main .insights > div:hover {
+    box-shadow: none;
+}
+
+main .insights > div span {
+    background: var(--bg-3);
+    padding: 0.5rem;
+    border-radius: 50%;
+    color: whitesmoke;
+    font-size: 1.6rem;
+}
+
+main .insights > div.expense span {
+    background: var(--colour-danger);
+}
+
+main .insights > div.income span {
+    background: var(--colour-success);
+}
+
+main .insights > div .middle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+main .insights h3 {
+    margin: 1rem 0 0.6rem;
+    font-size: 1rem;
+}
+
+main .insights .progress {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+}
+
+main .insights svg{
+    width: 6rem;
+    height: 6rem;
+    margin: 0.2rem;
+}
+
+main .insights svg circle{
+    fill: none;
+    stroke: var(--bg-3);
+    stroke-width: 12;
+    stroke-linecap: round;
+    transform: translate(5px, 5px);
+}
+
+main .insights .remaining-budget svg circle{
+    stroke-dasharray: 110;
+    stroke-dashoffset: 92;
+}
+
+main .insights .expense svg circle{
+    stroke-dasharray: 110;
+    stroke-dashoffset: 22;
+}
+
+main .insights .income svg circle{
+    stroke-dasharray: 190;
+    stroke-dashoffset: 92;
+}
+
+main .insights .progress .number {
+    position: absolute;
+    top: 0;
+    left: 0.2rem;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main .insights small{
+    margin-top: 1rem;
+    display: block;
+}
+
+/* ---------- Main ---------- */
+
+main .recent-activity {
+    margin-top: 2.3rem;
+}
+
+main .recent-activity h2{
+    margin-bottom: 1rem;
+}
+
+main .recent-activity table{
+    background: var(--bg-light);
+    width: 100%;
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    transition: all 350ms ease;
+
+}
+
+main .recent-activity table:hover{
+    box-shadow: none;
+}
+
+main table thead th {
+    font-size: medium;
+}
+
+main table tbody td {
+    height: 2.8rem;
+    border-bottom: 1px solid var(--bg-3);
+    color: var(--bg);
+    font-size: medium;
+}
+
+main table tbody tr:last-child td {
+    border: none;
+}
+
+main .recent-activity a {
+    text-align: center;
+    display: block;
+    margin: 2rem auto;
+    color: var(--links);
+    font-weight: 600;
+}
+
+/* ---------- Right top content ---------- */
+
+.right {
+    margin-top: 1.4rem;
+}
+
+.right .top {
+    display: flex;
+    justify-content: end;
+    gap: 2rem;
+}
+
+.right .top button {
+    display: none;
+}
+
+.right .colour-toggle {
+    background: var(--text-3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 1.6rem;
+    width: 4.2rem;
+    cursor: pointer;
+    border-radius: var(--border-radius-1);
+    color: var(--bg-dark)
+}
+
+.right .colour-toggle span {
+    font-size: 1rem;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.right .colour-toggle span.active {
+    background-color: var(--bg-3);
+    color: var(--text-primary);
+    border-radius: var(--border-radius-1);
+}
+
+.right .top .profile{
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    text-align: right;
+    margin-right: 1rem;
+}
+
+/* ---------- Right budget content ---------- */
+.right .budget-goals {
+    margin-top: 1.5rem;
+}
+
+.right .budget-goals h2{
+    margin-bottom: 1rem;
+}
+
+.right .budget-goals .goals {
+    background-color: var(--bg-light);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    transition: all 350ms ease;
+}
+
+.right .budget-goals .goals:hover {
+    box-shadow: none;
+}
+
+.right .budget-goals .goals .goal {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 1rem;
+}
+
+.right .budget-goals a {
+    text-align: center;
+    display: block;
+    margin: 1rem auto;
+    color: var(--links);
+    font-weight: 600;
+}
+
+/* ---------- Right tracking content ---------- */
+.right .tracking-content {
+    margin-top: 2rem;
+}
+
+.right .tracking-content h2{
+    margin-bottom: 1rem;
+}
+
+.right .tracking-content .item {
+    background-color: var(--bg-light);
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 1.4rem var(--card-padding);
+    border-radius: var(--border-radius-3);
+    box-shadow: var(--box-shadow);
+    transition: all 350ms ease;
+}
+
+.right .tracking-content .item:hover {
+    box-shadow: none;
+}
+
+.right .tracking-content .item .info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+}
+
+.right .tracking-content .add-product {
+    background-color: transparent;
+    border: 2.5px dashed var(--bg-3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.right .tracking-content .add-product div {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.right .tracking-content a {
+    text-align: center;
+    display: block;
+    margin: 1rem auto;
+    color: var(--links);
+    font-weight: 600;
+}
+
+/* ---------- Media Query ---------- */
+@media screen and (max-width: 1400px) {
+    .container {
+        width: 92%;
+        grid-template-columns: 14rem auto 20rem;
+        margin: 0 20px;
+    }
 }
