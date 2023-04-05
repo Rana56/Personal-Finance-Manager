@@ -2,8 +2,24 @@
 :root {
     --text-primary: #f2e9e4;
     --text-secondary: #3B3B22;
+    --text-3: #dfd7e6;
+
+    --account-bg: #f1f1f1;
     --bg: #22223b;
     --bg-secondary: #9a8c98;
+    --bg-dark: #101042;
+    --bg-light: #e1dde5;
+    --bg-3: #5a5a9c;
+    --sidebar: #e1dde5;
+    --links: #5a5a9c;
+
+    --colour-danger: #e75461;
+    --colour-success: #31ad84;
+    --colour-warning: #f0950e;
+    --colour-info-dark: #39393d;
+
+    --box-shadow: 3rem 3rem 2rem var(--text-3);
+    --alternate-shadow: #1d1d5a;
 }
 
 * {
@@ -13,6 +29,10 @@
 @font-face {
     font-family: mont;
     src: url(../Fonts/Montserrat-VariableFont_wght.ttf);
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body{
@@ -37,7 +57,6 @@ header {
 }
 
 .navbar {
-    overflow: hidden;
     padding: 15px;
 }
 
@@ -62,6 +81,7 @@ header {
     transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
     display: block;
     border-radius: 100px;
+    text-align: center;
 }
 
 .navbar a:hover {
@@ -76,12 +96,45 @@ header {
     border-radius: 100px;
 }
 
+.dropdown-content {
+    display: none;
+    position: absolute;
+}
+
+.dropdown-content a {
+    margin: 2px 0px 2px;
+}
+
+.dropdownMain {
+    display: flex;
+    align-items: center;
+}
+
+.dropdownMain .material-icons-round {
+    transition: transform 0.5s ease-in-out;
+  }
+
+.dropdown:hover .dropdownMain span{
+    transform: rotate(180deg);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
 #logout {
     color: var(--text-primary);
     background-color: #ab6060;
     text-decoration: none; /* Property removes the underline */
     transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
     display: block;
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+}
+
+#logout:hover {
+    background-color: #975656;
+    color: #fff6f1;
 }
 
 #login {
@@ -111,6 +164,7 @@ header {
     justify-content: center;
     background-color: var(--bg);
     border-radius: 0 0 500% 540%/0 0 220% 220%;
+    box-shadow: var(--box-shadow);
 }
 
 .intro .container {
@@ -156,6 +210,7 @@ header {
     padding-top: 7%;
     padding-bottom: 2%;
     text-align: center;
+    transition: 0.5s ease;
 }
 
 .slides .container {
@@ -241,7 +296,7 @@ header {
     font-size: large;
     display: flex;
     justify-content: center;
-    color: var(--text-secondary);
+    color: var(--bg);
 }
 
 .homeContent .container{
@@ -260,6 +315,7 @@ header {
     margin-top: 20px;
     padding-inline: 20px;
     transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    box-shadow: .5 .5rem .6rem var(--text-3);
 }
 
 .slideshow  button:hover {
@@ -280,8 +336,11 @@ footer {
     background-color: var(--bg);
     color: var(--text-primary);
     text-align: center;
+    box-shadow: 0 -2rem 2rem var(--text-3);
+    border-radius: 120% 120% 0 0/75% 75% 0 0;
 }
 
 footer a {
-    text-decoration-color: var(--text-primary);
+    color: var(--colour-danger);
+    text-decoration: none;
 }

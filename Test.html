@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        /* Palette colours: 22223b, 4a4e69, f2e9e4, 9a8c98, c9ada7*/
+        :root {
+            --text-primary: #f2e9e4;
+            --text-secondary: #3B3B22;
+            --text-3: #dfd7e6;
+
+            --account-bg: #f1f1f1;
+            --bg: #22223b;
+            --bg-secondary: #9a8c98;
+            --bg-dark: #101042;
+            --bg-light: #e1dde5;
+            --bg-3: #5a5a9c;
+            --sidebar: #e1dde5;
+            --links: #5a5a9c;
+
+            --colour-danger: #e75461;
+            --colour-success: #31ad84;
+            --colour-warning: #f0950e;
+            --colour-info-dark: #39393d;
+
+            --box-shadow: 3rem 3rem 2rem var(--text-3);
+            --alternate-shadow: #1d1d5a;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        @font-face {
+            font-family: mont;
+            src: url(../Fonts/Montserrat-VariableFont_wght.ttf);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body{
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--text-primary);
+            font-family: mont;
+        }
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0px 9%;
+            background-color: var(--bg);
+        }
+
+        .logo {
+            font-size: larger;
+            font-weight: bold;
+        }
+
+        .navbar {
+            padding: 15px;
+        }
+
+        .navbar ul {
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .navbar li {
+            list-style: none;
+            border-radius: 100px;
+            margin-inline: 5px;
+            
+        }
+
+        /* Style of links in navigation bar */
+        .navbar li a {
+            color: var(--text-primary);
+            text-decoration: none; /* Property removes the underline */
+            font-size: 20px;
+            padding: 14px 16px;
+            transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+            display: block;
+            border-radius: 100px;
+            text-align: center;
+        }
+
+        .navbar a:hover {
+            background-color: var(--text-primary);
+            color: #22223b;
+            border-radius: 100px;
+        }
+
+        .navbar a.active {
+            background-color: var(--text-primary);
+            color: #22223b;
+            border-radius: 100px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+        }
+
+        .dropdown-content a {
+            margin: 2px 0px 2px;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+    </style>
+    <body>
+        <header id="top">
+            <div class="logo">
+                <p>Cash Control</p>
+            </div>
+
+            <div class="navbar">
+                <ul>
+                    <li><a href="index.php">Home</a></li>
+                    <li><a href="savings.php">Savings</a></li>
+                    <li><a href="trackings.php">Tracking</a></li>
+                    <li class="dropdown">
+                        <a href="#">Account</a>
+                        <div class="dropdown-content">
+                            <a href="accounts.php">My Account</a>
+                            <a logout href="logout.php">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </header>
+    </body>
+
+</html>
+

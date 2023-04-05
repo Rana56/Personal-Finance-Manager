@@ -6,6 +6,9 @@
         <link rel="stylesheet" href="css/home.css">
         <link rel="icon" href="Images/money.png">
         <title>Final Year Project</title>
+
+        <!-- Icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     </head>
 
     <body>
@@ -20,12 +23,12 @@
             <div class="container">
                 <h1 id="typing"></h1>
                 <p>Take Control of Your Fiances, One Click at a Time: Your Personal Finance Manager.</p>
-                <button>See More</button>
+                <button onclick="window.location.href='#slideSection'">See More</button>
             </div>
         </div>
 
         <!-- Main Content -->
-        <div class="slideshow">
+        <div class="slideshow" id="slideSection">
             <div class="slides">
                 <div class="container">
                     <img src="Images/budget.png" alt="Image">
@@ -75,7 +78,14 @@
                 <h1>Get started for 
                     <span style="color: #5959c5;">free</span>
                 </h1>
-                <p>Track your expenditures, Set goals and Budget like a Pro</p>
+                <p>Track your expenditures, Set goals and Budget like a Pro.</p>
+            </div>
+        </div>
+
+        <div class="homeContent">
+            <div class="container">
+                <h1>Change your relastionship with money</h1>
+                <p>Start saving and spending with confidence and clarity</p>
             </div>
         </div>
         

@@ -1,11 +1,11 @@
 function goSavings(){
-    window.location.href="savings.php"
+    window.location.href="savings.php";
 }
 
 function goTracking(){
-    window.location.href="trackings.php"
+    window.location.href="trackings.php";
 }
 
 function goSignup(){
-    window.location.href="signup.php"
+    window.location.href="signup.php";
 }

@@ -12,6 +12,28 @@
     </head>
 
     <body>
+
+        <?php
+            session_start();
+            //checks if user is logged in
+            
+            if (!isset($_SESSION['username'])){
+                header("Location: login.php");
+                exit();
+            }
+            
+            include_once("connectdb.php");
+
+            try {
+                //gets the user's name
+                $fname = $db->prepare("SELECT first_name FROM user WHERE email = ?");
+                $fname->execute(array($_SESSION['username']));
+                $fname = $fname->fetch();
+            } catch (PDOException $ex) {
+                echo $ex;
+            }
+        ?>
+        
         <header id="top">
             <div class="logo">
                 <p>Cash Control</p>
@@ -48,19 +70,19 @@
                         <span class="material-icons-round">person_outline</span>
                         <h3>Finance</h3>
                     </a>
-                    <a href="#">
-                        <span class="material-icons-round">insights</span>
-                        <h3>Analytics</h3>
-                    </a>
-                    <a href="#">
+                    <a href="budget.php">
                         <span class="material-icons-round">assignment</span>
                         <h3>Budget</h3>
+                    </a>
+                    <a href="#">
+                        <span class="material-icons-round">insights</span>
+                        <h3>Tracking</h3>
                     </a>
                     <a href="#">
                         <span class="material-icons-round">settings</span>
                         <h3>Settings</h3>
                     </a>
-                    <a href="#">
+                    <a href="logout.php">
                         <span class="material-icons-round">logout</span>
                         <h3>Logout</h3>
                     </a>
@@ -182,7 +204,7 @@
                     </div>
                     <div class="profile">
                         <div class="info">
-                            <p>Hi, <b>Admin</b></p>
+                            <h3>Hi, <?= $fname["first_name"] ?></h3>
                         </div>
                     </div>
                 </div>
@@ -244,6 +266,7 @@
                         </div>
                         <div class="item add-product">
                             <div>
+                                <a href="#"></a>
                                 <span class="material-icons-round active">add</span>
                                 <h3>Add Product</h3>
                             </div>
@@ -259,4 +282,5 @@
     </body>
 
     <script src="Scripts/colourToggle.js"></script>
+    <!-- <script src="Scripts/accountFunctions.js"></script> -->
 </html>

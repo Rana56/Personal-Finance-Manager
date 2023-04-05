@@ -1,0 +1,297 @@
+:root {
+    --text-primary: #f2e9e4;
+    --text-secondary: #3B3B22;
+    --text-3: #dfd7e6;
+
+    --account-bg: #f1f1f1;
+    --bg: #22223b;
+    --bg-secondary: #9a8c98;
+    --bg-dark: #101042;
+    --bg-light: #e1dde5;
+    --bg-3: #5a5a9c;
+    --sidebar: #e1dde5;
+    --links: #5a5a9c;
+
+    --colour-danger: #e75461;
+    --colour-success: #31ad84;
+    --colour-warning: #f0950e;
+    --colour-info-dark: #39393d;
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 0.8rem;
+    --border-radius-3: 1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 0 2rem 3rem var(--text-3);
+    --alternate-shadow: #1d1d5a;
+}
+
+.dark-theme {
+    --account-bg: #101042;
+    --bg-light: #32366b;
+    --bg: #f2e9e4;
+    --links: #f2e9e4;
+    --colour-info-dark: #f2e9e4;
+
+    --box-shadow: 0 2rem 3rem var(--alternate-shadow);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    appearance: 0;
+    border: 0;
+    text-decoration: none;
+    list-style: none;
+}
+
+@font-face {
+    font-family: mont;
+    src: url(../Fonts/Montserrat-VariableFont_wght.ttf);
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--account-bg);
+    color: var(--bg);
+    font-family: mont;
+    font-size: 0.88rem;
+    user-select: none;
+    overflow-x: hidden;        /*Changes how content is shown depending it size */ 
+}
+
+.container {
+    display: grid;
+    width: 96%;
+    margin: 0 auto;
+    gap: 1.8rem;
+    grid-template-columns: 14rem auto 23rem;
+}
+
+/* ---------- Header ---------- */
+header {
+    background-color: #22223b;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 9%;
+}
+
+header .logo p{
+    font-size: larger;
+    font-weight: bold;
+    color: var(--text-primary);
+}
+
+.navbar {
+    overflow: hidden;
+    padding: 15px;
+}
+
+.navbar ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navbar li {
+    list-style: none;
+    border-radius: 100px;
+    margin-inline: 5px;
+}
+
+/* Style of links in navigation bar */
+.navbar li a {
+    color: var(--text-primary);
+    text-decoration: none; /* Property removes the underline */
+    font-size: 20px;
+    padding: 14px 16px;
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    display: block;
+    border-radius: 100px;
+}
+
+.navbar a:hover {
+    background-color: var(--text-primary);
+    color: #22223b;
+    border-radius: 100px;
+}
+
+.navbar a.active {
+    background-color: var(--text-primary);
+    color: #22223b;
+    border-radius: 100px;
+}
+
+#logout {
+    color: var(--text-primary);
+    background-color: #ab6060;
+    text-decoration: none; /* Property removes the underline */
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    display: block;
+}
+
+#login {
+    color: var(--text-secondary);
+    background-color: var(--bg-secondary);
+    text-decoration: none; /* Property removes the underline */
+    font-size: 20px;
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    display: block;
+}
+
+#register {
+    color: var(--text-primary);
+    background-color: #ab6060;
+    text-decoration: none; /* Property removes the underline */
+    font-size: 20px;
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    display: block;
+}
+
+/* ---------- Base ---------- */
+a {
+    color: var(--bg);
+}
+
+h1 {
+    font-weight: 800;
+    font-size: 1.8rem;
+}
+
+h2 {
+    font-size: 1.4rem;
+}
+
+h3 {
+    font-size: 0.9rem;
+}
+
+h4 {
+    font-size: 0.8rem;
+}
+
+h5 {
+    font-size: 0.77rem;
+}
+
+small {
+    font-size: 0.75rem;
+}
+
+.text-muted{
+    color: var(--colour-info-dark);
+}
+
+p {
+    color: var(--bg);
+}
+
+.danger {
+    color: var(--colour-danger);
+}
+
+.success {
+    color: var(--colour-success);
+}
+
+.warning {
+    color: var(--colour-warning);
+}
+
+aside {
+    height: 100vh;
+}
+
+aside .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.4rem;
+}
+
+aside .logo p{
+    gap: 0.8rem;
+    font-size: larger;
+    font-weight: bold;
+    margin-left: 2rem;
+    display: none;
+}
+
+aside .closeTab {
+    display: none;
+}
+
+/* ---------- Sidebar ----------*/
+
+aside .sidebar {
+    background-color: var(--bg-light);
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    position: relative;
+    top: 2rem;
+    border-radius: 10px;
+}
+
+aside h3 {
+    font-weight: 600;
+}
+
+aside .sidebar a {
+    display: flex;
+    margin-left: 2rem;
+    gap: 1rem;
+    align-items: center;
+    position: relative;
+    height: 3.7rem;
+    transition: all 350ms ease;
+    border-radius: 10px;
+}
+
+aside .sidebar a span {
+    font-size: 1.6rem;
+    transition: all 350ms ease;
+}
+
+aside .sidebar a:last-child{
+    position: absolute;
+    bottom: 2rem;
+    width: 100%;
+}
+
+aside .sidebar a.active {
+    background: #c9c6cc;
+    color: var(--bg-dark);
+    margin-left: 0;
+    border-radius: 10px;
+}
+
+aside .sidebar a.active:before {
+    content: '';
+    width: 6px;
+    height: 100%;
+    background: var(--bg-3);
+    border-radius: 3px;
+}
+
+aside .sidebar a.active span {
+    color: var(--bg-dark);
+    margin-left: calc(1rem - 6px);          /*align with other icons*/
+}
+
+aside .sidebar a:hover {
+    color: var(--bg-dark);
+}
+
+aside .sidebar a:hover span {
+    margin-left: 1rem;
+}

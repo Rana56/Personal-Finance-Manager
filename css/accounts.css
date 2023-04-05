@@ -585,6 +585,7 @@ main .recent-activity a {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .right .tracking-content .add-product div {

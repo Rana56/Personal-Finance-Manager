@@ -57,16 +57,18 @@
 
                 if (password_verify($_POST["pwd"], $row["password"])){              //fetch returns the next row from the result set, this also check the password against the saved password
                     session_start();                                                //starting session allows to store user login
+                    $_SESSION = array();
+                    
                     $_SESSION['username'] = $_POST['email'];                        //adds user to the session
-
+                    
                     header("Location:accounts.php");                                  //redirect user to a new page
                     exit();                                                         //<meta http-equiv="Refresh" content="0; url='https://localhost/htdocs/lab8/course.php'" />
 
                 } else {
-                    echo "<h4 style='color:red' class='notification'>Login Error - Password incorrect</h4>";
+                    echo "<h4 style='color:var(--colour-danger)' class='notification'>Login Error - Password or Email incorrect</h4>";
                 }
             } else {
-                echo "<h4 style='color:red' class='notification'>Error logging in, account not found </h4>";
+                echo "<h4 style='color:var(--colour-danger)' class='notification'>Error logging in, account not found </h4>";
             }
         } catch (PDOException $ex) {
 			echo("Failed to connect to the database. <br />");

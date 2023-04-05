@@ -3,6 +3,11 @@
   --text-primary: #f2e9e4;
   --bg: #22223b;
   --bg-secondary: #9a8c98;
+
+  --colour-danger: #e75461;
+  --colour-success: #31ad84;
+  --colour-warning: #f0950e;
+  --colour-info-dark: #39393d;
 }
 
 * {
@@ -65,6 +70,7 @@ h2 {
   transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
   display: block;
   border-radius: 100px;
+  text-align: center;
 }
 
 .navbar a:hover {
@@ -79,12 +85,45 @@ h2 {
   border-radius: 100px;
 }
 
+.dropdown-content {
+  display: none;
+  position: absolute;
+}
+
+.dropdown-content a {
+  margin: 2px 0px 2px;
+}
+
+.dropdownMain {
+  display: flex;
+  align-items: center;
+}
+
+.dropdownMain .material-icons-round {
+  transition: transform 0.5s ease-in-out;
+}
+
+.dropdown:hover .dropdownMain span{
+  transform: rotate(180deg);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
 #logout {
   color: var(--text-primary);
   background-color: #ab6060;
   text-decoration: none; /* Property removes the underline */
   transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
   display: block;
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+}
+
+#logout:hover {
+  background-color: #975656;
+  color: #fff6f1;
 }
 
 #login {
