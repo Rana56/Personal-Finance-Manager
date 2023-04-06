@@ -1,4 +1,3 @@
-/* Palette colours: 22223b, 4a4e69, f2e9e4, 9a8c98, c9ada7*/
 :root {
     --text-primary: #f2e9e4;
     --text-secondary: #3B3B22;
@@ -24,7 +23,6 @@
     --border-radius-3: 1.2rem;
 
     --card-padding: 1.8rem;
-    --card-padding2: 1rem;
     --padding-1: 1.2rem;
 
     --box-shadow: 0 2rem 3rem var(--text-3);
@@ -298,123 +296,142 @@ aside .sidebar a:hover span {
     margin-left: 1rem;
 }
 
-/* ---------- Main ---------- */
+/* ---------- Main ----------*/
+
 main {
     margin-top: 1.4rem;
 }
 
-main .date {
-    display: inline-block;
+main .income-expense-btn {
+    display: flex;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+main .income-expense-btn .add-product {
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+main .income-expense-btn .income {
+    border: 2.5px dashed #227459;
+    color: #227459;
+}
+
+main .income-expense-btn .expense {
+    border: 2.5px dashed #ad6d0d;
+    color: #ad6d0d;
+}
+
+main .income-expense-btn .add-product div {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+main .income-expense-btn .add-product{
     background-color: var(--bg-light);
-    border-radius: var(--border-radius-1);
-    margin-top: 1rem;
-    padding: 0.5rem 1.6rem;
-}
-
-main .date input[type='date']{
-    background: transparent;
-    color: var(--bg);
-}
-
-main .insights {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.2rem;
-}
-
-main .insights > div {
-    background: var(--bg-light);
-    padding: var(--card-padding2);
-    border-radius: var(--card-border-radius);
-    margin-top: 1rem;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 1.4rem var(--card-padding);
+    border-radius: var(--border-radius-3);
     box-shadow: var(--box-shadow);
-    transition: all 300ms ease;
+    transition: all 350ms ease;
 }
 
-main .insights > div:hover {
+main .income-expense-btn .add-product:hover {
     box-shadow: none;
 }
 
-main .insights > div span {
-    background: var(--bg-3);
-    padding: 0.5rem;
-    border-radius: 50%;
-    color: whitesmoke;
-    font-size: 1.6rem;
-}
+/* ---------- Main Popup ----------*/
 
-main .insights > div.expense span {
-    background: var(--colour-danger);
-}
-
-main .insights > div.income span {
-    background: var(--colour-success);
-}
-
-main .insights > div .middle {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-main .insights h3 {
-    margin: 1rem 0 0.6rem;
-    font-size: 1rem;
-}
-
-main .insights .progress {
-    position: relative;
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-}
-
-main .insights svg{
-    width: 6rem;
-    height: 6rem;
-    margin: 0.2rem;
-}
-
-main .insights svg circle{
-    fill: none;
-    stroke: var(--bg-3);
-    stroke-width: 12;
-    stroke-linecap: round;
-    transform: translate(5px, 5px);
-}
-
-main .insights .remaining-budget svg circle{
-    stroke-dasharray: 110;
-    stroke-dashoffset: 92;
-}
-
-main .insights .expense svg circle{
-    stroke-dasharray: 110;
-    stroke-dashoffset: 22;
-}
-
-main .insights .income svg circle{
-    stroke-dasharray: 190;
-    stroke-dashoffset: 92;
-}
-
-main .insights .progress .number {
+.popup {
     position: absolute;
-    top: 0;
-    left: 0.2rem;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    top: 50%;
+    left: 50%;
+    display: none;
+    transform: translate(-50%,-50%) scale(1.25);
+    width: 380px;
+    padding: 20px 30px;
+    background: var(--bg-3);
+    box-shadow: var(--box-shadow);
+    border-radius: 10px;
+    color: var(--account-bg);
 }
 
-main .insights small{
-    margin-top: 1rem;
+.popup.active {
+    top: 50%;
     display: block;
+    transform: translate(-50%,-50%) scale(1);
 }
 
-/* ---------- Main ---------- */
+#popup-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    line-height: 15px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.popup .form h2{
+    text-align: center;
+    margin: 10px 0px 20px;
+    font-size: 25px;
+}
+
+.popup .form .form-element {
+    margin: 15px 0px;
+}
+
+.popup .form .form-element label {
+    font-size: 20px;
+}
+
+.popup .form .form-element input[type='date']{
+    background: transparent;
+    color: var(--account-bg);
+}
+
+.popup .form .form-element input[type="text"],
+.popup .form .form-element input[type='date']
+{
+    margin-top: 5px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border: 1px solid var(--bg);
+    border-radius: 5px;
+}
+
+.form button {
+    text-transform: uppercase;
+    outline: 0;
+    background: #4CAF50;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 15px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+}
+
+.form button:hover,.form button:active,.form button:focus {
+    background: #43A047;
+}
+
+/* ---------- Main Table ----------*/
 
 main .recent-activity {
     margin-top: 2.3rem;
@@ -601,13 +618,4 @@ main .recent-activity a {
     margin: 1rem auto;
     color: var(--links);
     font-weight: 600;
-}
-
-/* ---------- Media Query ---------- */
-@media screen and (max-width: 1400px) {
-    .container {
-        width: 92%;
-        grid-template-columns: 14rem auto 20rem;
-        margin: 0 20px;
-    }
 }

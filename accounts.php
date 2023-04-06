@@ -66,7 +66,7 @@
                         <span class="material-icons-round">grid_view</span>
                         <h3>Overview</h3>
                     </a>
-                    <a href="#">
+                    <a href="finance.php">
                         <span class="material-icons-round">person_outline</span>
                         <h3>Finance</h3>
                     </a>

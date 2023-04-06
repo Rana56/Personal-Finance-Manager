@@ -8,7 +8,7 @@
         <!-- Icons -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 
-        <link rel="stylesheet" href="css/accounts.css">
+        <link rel="stylesheet" href="css/finance.css">
     </head>
 
     <body>
@@ -50,6 +50,27 @@
             </div>
         </header>
 
+        <div class="popup" id="incomePopup">
+            <span class="material-icons-round" id="popup-close-btn">close</span>
+            <div class="form">
+                <h2>Enter Income</h2>
+                <div class="form-element">
+                    <label for="income-money">Amount</label>
+                    <input type="text" id="income-money" placeholder="Enter Income - e.g. 20.00" required>
+                </div>
+                <div class="form-element">
+                    <label for="income-date">Date</label>
+                    <input type="date" id="income-date" required>
+                </div>
+                <div class="form-element">
+                    <label for="income-note">Note</label>
+                    <input type="text" id="income-note" required>
+                </div>
+
+                <button tpye="submit" name="submit">Submit</button>
+            </div>
+        </div>
+
         <div class="container">
             <!-- Sidebar -->
             <aside>
@@ -67,11 +88,11 @@
                         <span class="material-icons-round">grid_view</span>
                         <h3>Overview</h3>
                     </a>
-                    <a href="finance.php">
-                        <span class="material-icons-round">person_outline</span>
+                    <a href="#">
+                        <span class="material-icons-round" class="active">person_outline</span>
                         <h3>Finance</h3>
                     </a>
-                    <a href="budget.php" class="active">
+                    <a href="budget.php">
                         <span class="material-icons-round">assignment</span>
                         <h3>Budget</h3>
                     </a>
@@ -92,7 +113,25 @@
 
             <!-- Main -->
             <main>
-                <h1>Budget</h1>
+                <h1>Finance</h1>
+
+                <div class="income-expense-btn">
+                     <div class="add-product income">
+                        <div id="show-incomePopup">
+                            <a href="#" ></a>
+                            <span class="material-icons-round active">add</span>
+                            <h3>Add Income</h3>
+                        </div>
+                    </div>
+                    <div class="add-product expense">
+                        <div id="show-expensePopup">
+                            <a href="#"></a>
+                            <span class="material-icons-round active">add</span>
+                            <h3>Add Expense</h3>
+                        </div>
+                    </div>
+                </div>
+               
                 
                 <!-- Recent Activities  -->
                 <div class="recent-activity">
@@ -145,7 +184,7 @@
 
                 <!-- Budget Content -->
                 <div class="budget-goals">
-                    <h2>Budget Goals</h2>
+                    <h2>Income</h2>
                     <div class="goals">
                         <div class="goal">
                             <h3>Goal Name</h3>
@@ -198,16 +237,7 @@
                                 <p><b>No Change</b></p>
                             </div>
                         </div>
-                        <div class="item add-product">
-                            <div>
-                                <a href="#"></a>
-                                <span class="material-icons-round active">add</span>
-                                <h3>Add Product</h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <a href="#">Show All</a>
+                        
                 </div>
 
             </div>
@@ -216,4 +246,5 @@
     </body>
 
     <script src="Scripts/colourToggle.js"></script>
+    <script src="Scripts/financePopup.js"></script>
 </html>

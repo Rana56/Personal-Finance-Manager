@@ -82,16 +82,17 @@ header {
     display: block;
     border-radius: 100px;
     text-align: center;
+    background-color: var(--bg);
 }
 
 .navbar a:hover {
-    background-color: var(--text-primary);
+    background-color: var(--bg-light);
     color: #22223b;
     border-radius: 100px;
 }
 
 .navbar a.active {
-    background-color: var(--text-primary);
+    background-color: var(--bg-light);
     color: #22223b;
     border-radius: 100px;
 }
@@ -122,6 +123,19 @@ header {
     display: block;
 }
 
+#myAccount {
+    color: var(--text-primary);
+    background-color: #31ad84;
+    text-decoration: none; /* Property removes the underline */
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    display: block;
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+}
+
+#myAccount:hover {
+    background-color: #278868;
+    color: #fff6f1;
+}
 
 #logout {
     color: var(--text-primary);

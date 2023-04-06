@@ -27,7 +27,7 @@
                         </div>
                         
                         <div class="dropdown-content">
-                            <a href="accounts.php">My Account</a>
+                            <a href="accounts.php" id="myAccount">My Account</a>
                             <a id="logout" href="logout.php">Logout</a>
                         </div>
                     </li>

@@ -6,6 +6,8 @@
         <link rel="stylesheet" href="css/savings.css">
         <link rel="icon" href="Images/money.png">
         <title>Final Year Project</title>
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     </head>
 
     <body>

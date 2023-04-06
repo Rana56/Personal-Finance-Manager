@@ -1,8 +1,24 @@
 :root {
     --text-primary: #f2e9e4;
     --text-secondary: #3B3B22;
+    --text-3: #dfd7e6;
+
+    --account-bg: #f1f1f1;
     --bg: #22223b;
     --bg-secondary: #9a8c98;
+    --bg-dark: #101042;
+    --bg-light: #e1dde5;
+    --bg-3: #5a5a9c;
+    --sidebar: #e1dde5;
+    --links: #5a5a9c;
+
+    --colour-danger: #e75461;
+    --colour-success: #31ad84;
+    --colour-warning: #f0950e;
+    --colour-info-dark: #39393d;
+
+    --box-shadow: 3rem 3rem 2rem var(--text-3);
+    --alternate-shadow: #1d1d5a;
 }
 
 * {
@@ -62,16 +78,17 @@ header {
     display: block;
     border-radius: 100px;
     text-align: center;
+    background-color: var(--bg);
 }
 
 .navbar a:hover {
-    background-color: var(--text-primary);
+    background-color: var(--bg-light);
     color: #22223b;
     border-radius: 100px;
 }
 
 .navbar a.active {
-    background-color: var(--text-primary);
+    background-color: var(--bg-light);
     color: #22223b;
     border-radius: 100px;
 }
@@ -102,6 +119,19 @@ header {
     display: block;
 }
 
+#myAccount {
+    color: var(--text-primary);
+    background-color: #31ad84;
+    text-decoration: none; /* Property removes the underline */
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    display: block;
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+}
+
+#myAccount:hover {
+    background-color: #23785c;
+    color: #fff6f1;
+}
 
 #logout {
     color: var(--text-primary);
