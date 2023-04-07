@@ -156,6 +156,10 @@ header {
     display: block;
 }
 
+#login a{
+    background-color: var(--bg-secondary);
+}
+
 #register {
     color: var(--text-primary);
     background-color: #ab6060;
@@ -163,6 +167,10 @@ header {
     font-size: 20px;
     transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
     display: block;
+}
+
+#register a {
+    background-color: #ab6060;
 }
 
 .intro {

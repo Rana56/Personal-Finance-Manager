@@ -357,7 +357,7 @@ main .income-expense-btn .add-product:hover {
     transform: translate(-50%,-50%) scale(1.25);
     width: 380px;
     padding: 20px 30px;
-    background: var(--bg-3);
+    background: #9e9ed0;
     box-shadow: var(--box-shadow);
     border-radius: 10px;
     color: var(--account-bg);
@@ -369,7 +369,19 @@ main .income-expense-btn .add-product:hover {
     transform: translate(-50%,-50%) scale(1);
 }
 
-#popup-close-btn {
+#popup-close-income {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    line-height: 15px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+#popup-close-expense {
     position: absolute;
     top: 20px;
     right: 20px;
@@ -387,6 +399,7 @@ main .income-expense-btn .add-product:hover {
     font-size: 25px;
 }
 
+
 .popup .form .form-element {
     margin: 15px 0px;
 }
@@ -394,6 +407,22 @@ main .income-expense-btn .add-product:hover {
 .popup .form .form-element label {
     font-size: 20px;
 }
+
+.popup .form .form-element-select {
+    font-size: 20px;
+    margin: 15px 0px;
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+}
+
+.popup .form .form-element-select select {
+    font-size: 15px;
+    border-radius: 10px;
+    color: var(--bg);
+    padding: 10px;
+}
+
 
 .popup .form .form-element input[type='date']{
     background: transparent;
@@ -415,7 +444,7 @@ main .income-expense-btn .add-product:hover {
 .form button {
     text-transform: uppercase;
     outline: 0;
-    background: #4CAF50;
+    background: #58915a;
     width: 100%;
     border: none;
     border-radius: 10px;

@@ -22,7 +22,7 @@
                     <input type="email" placeholder="Email" name="email"/>
                     <input type="password" placeholder="Password" name="pwd"/>
                     
-                    <button tpye="submit" name="submit">login</button>
+                    <button type="submit" name="submit">login</button>
                     
                     <p class="message">Not registered? <a href="signup.php">Create an account</a></p>
 
