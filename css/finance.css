@@ -15,6 +15,7 @@
     --colour-danger: #e75461;
     --colour-success: #31ad84;
     --colour-warning: #f0950e;
+    --colour-warking-dark: #ad6d0d;
     --colour-info-dark: #39393d;
 
     --card-border-radius: 2rem;
@@ -322,8 +323,8 @@ main .income-expense-btn .income {
 }
 
 main .income-expense-btn .expense {
-    border: 2.5px dashed #ad6d0d;
-    color: #ad6d0d;
+    border: 2.5px dashed var(--colour-danger);
+    color: var(--colour-danger);
 }
 
 main .income-expense-btn .add-product div {
@@ -463,7 +464,7 @@ main .income-expense-btn .add-product:hover {
 /* ---------- Main Table ----------*/
 
 main .recent-activity {
-    margin-top: 2.3rem;
+    margin-top: 1.3rem;
 }
 
 main .recent-activity h2{
@@ -506,6 +507,18 @@ main .recent-activity a {
     margin: 2rem auto;
     color: var(--links);
     font-weight: 600;
+}
+
+main .recent-activity button {
+    color: #4A5093;
+    background-color: var(--colour-warning);
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    padding: 8px 12px;
+    border-radius: 100px;
+}
+
+main .recent-activity button:hover {
+    background-color: var(--colour-warking-dark);
 }
 
 /* ---------- Right top content ---------- */

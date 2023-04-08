@@ -8,6 +8,9 @@
         <!-- Icons -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 
+        <!-- Chart library -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
+        
         <link rel="stylesheet" href="css/finance.css">
     </head>
 
@@ -108,7 +111,7 @@
                     </div>
                     <div class="form-element">
                         <label for="income-note">Note</label>
-                        <input type="text" id="income-note" required name="note-income">
+                        <input type="text" id="income-note" placeholder="Enter Note - e.g. Tesco, Party" required name="note-income">
                     </div>
                     <div class="form-element-select">
                         <label for="income-select">Category</label>
@@ -157,7 +160,7 @@
                     </div>
                     <div class="form-element">
                         <label for="expense-note">Note</label>
-                        <input type="text" id="expense-note" required name="note-expense">
+                        <input type="text" id="expense-note" placeholder="Enter Note - e.g. Tesco, Party" required name="note-expense">
                     </div>
                     <div class="form-element-select">
                         <label for="expense-select">Note</label>
@@ -212,35 +215,136 @@
                     </div>
                 </div>
                
+                <p id=test></p>
+                <p id=test2></p>
                 
-                <!-- Recent Activities  -->
+                <!-- Recent Activities - expense  -->
                 <div class="recent-activity">
-                    <h2>Recent Activites</h2>
+                    <h2>Recent <span style="color: var(--colour-danger)">Expense</span></h2>
+                    <table >
+                        <thead>
+                            <tr>
+                                <th>Money</th>
+                                <th>Date</th>
+                                <th>Note</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expense-table">
+                        <?php
+                            include_once("connectdb.php");
+                            try {
+                                //gets the user id from the user email stored in session data
+                                $userid = $db->prepare("SELECT id FROM user WHERE email = ?");
+                                $userid->execute(array($_SESSION['username']));
+                                //gets the first row of pdo object
+                                $user = $userid->fetch();
+                                
+                                //gets data in descening - i.e. most recent
+                                $qry = $db->prepare("SELECT * FROM expense where userID = :userid ORDER BY date DESC");
+                                $qry->bindParam(':userid', $user['id'], PDO::PARAM_STR);
+                                $qry->execute();
+
+                                if ($qry->rowCount() > 0){                                     //checks if a rows are returned
+                                    $i = 0;
+
+                                    //loop 5 times or less
+                                    while (($row = $qry->fetch(PDO::FETCH_ASSOC)) && ($i < 4)){
+                                        $money = '£' . $row['amount'];
+                                        $expense = $row['date'];
+                                        $note = $row['note'];
+                                        $expenseID = $row['expenseID'];
+                                        ?>
+
+                                        <tr>
+                                        <td  class="danger"><?= $money ?></td>
+                                        <td><?= $expense ?></td>
+                                        <td><?= $note ?></td>
+                                        <td>
+                                            <button class="remove-expense" type="button" data-expense-id="<?=$expenseID?>">
+                                                Remove
+                                            </button>
+                                        </td>
+                                        </tr>
+
+                                        <?php
+                                        $i++;
+                                    }
+                                    
+                                }                                     
+                                else {
+                                    echo("<h4 class='warning'>Currently no expenses</h4>");
+                                }
+                            } catch (PDOException $ex) {
+                                echo $ex;
+                            }
+                        ?>
+
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Recent Activities - income  -->
+                <div class="recent-activity">
+                    <h2>Recent <span style="color: #227459">Income</span></h2>
                     <table>
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Date</th>
-                                <th>Type</th>
                                 <th>Money</th>
+                                <th>Date</th>
+                                <th>Note</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>Tesco</td>
-                                <td>24/3/2023</td>
-                                <td class="danger">Expense</td>
-                                <td class="warning">£20</td>
-                            </tr>
-                            <tr>
-                                <td>Test</td>
-                                <td>24/3/2023</td>
-                                <td class="danger">Expense</td>
-                                <td class="warning">£20</td>
-                            </tr>
+                        <tbody id="income-table">
+                        <?php
+                            include_once("connectdb.php");
+                            try {
+                                //gets the user id from the user email stored in session data
+                                $userid = $db->prepare("SELECT id FROM user WHERE email = ?");
+                                $userid->execute(array($_SESSION['username']));
+                                //gets the first row of pdo object
+                                $user = $userid->fetch();
+                                
+                                //gets data in descening - i.e. most recent
+                                $qry = $db->prepare("SELECT * FROM income where userID = :userid ORDER BY date DESC");
+                                $qry->bindParam(':userid', $user['id'], PDO::PARAM_STR);
+                                $qry->execute();
+
+                                if ($qry->rowCount() > 0){                                     //checks if a rows are returned
+                                    $i = 0;
+
+                                    //loop 5 times or less
+                                    while (($row = $qry->fetch(PDO::FETCH_ASSOC)) && ($i < 4)){
+                                        $money = '£' . $row['amount'];
+                                        $income = $row['date'];
+                                        $note = $row['note'];
+                                        $incomeID = $row['incomeID'];
+                                        ?>
+
+                                        <tr>
+                                        <td  class="success"><?= $money ?></td>
+                                        <td><?= $income ?></td>
+                                        <td><?= $note ?></td>
+                                        <td>
+                                            <button class="remove-income" type="button" data-income-id="<?=$incomeID?>">
+                                                Remove
+                                            </button>
+                                        </td>
+                                        </tr>
+
+                                        <?php
+                                        $i++;
+                                    }
+                                    
+                                }                                     
+                                else {
+                                    echo("<h4 class='warning'>Currently no Income </h4>");
+                                }
+                            } catch (PDOException $ex) {
+                                echo $ex;
+                            }
+                        ?>
                         </tbody>
                     </table>
-                    <a href="#">Show All</a>
                 </div>
 
             </main>
@@ -264,24 +368,41 @@
 
                 <!-- Budget Content -->
                 <div class="budget-goals">
-                    <h2>Income</h2>
-                    <div class="goals">
-                        <div class="goal">
-                            <h3>Goal Name</h3>
-                            <h4>£250 / £350</h4>
-                            <p><b>71% </b></p>
-                        </div>
-                        <div class="goal">
-                            <h3>Goal Name</h3>
-                            <h4>£50 / £450</h4>
-                            <p><b>71% </b></p>
-                        </div>
-                        <div class="goal">
-                            <h3>Goal Name</h3>
-                            <h4>£30 / £10050</h4>
-                            <p><b>1% </b></p>
-                        </div>
-                    </div>
+                    <h2>Spending</h2>
+                    <canvas id="pieChart" style="width:100%;max-width:600px"></canvas>
+                    <?php
+                        //include_once("php/financeGraph.php");
+                    ?>
+
+<script>
+var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+var yValues = [55, 49, 44, 24, 15];
+var barColors = [
+  "#b91d47",
+  "#00aba9",
+  "#2b5797",
+  "#e8c3b9",
+  "#1e7145"
+];
+
+new Chart("pieChart", {
+  type: "pie",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    title: {
+      display: false,
+      text: "World Wide Wine Production 2018"
+    }
+  }
+});
+</script>
+                    
                     <a href="#">Show All</a>
                 </div>
 
@@ -325,12 +446,19 @@
         </div> 
     </body>
 
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script src="Scripts/colourToggle.js"></script>
     <script src="Scripts/financePopup.js"></script>
+    <script src="Scripts/finance-delete.js"></script>
+    
 </html>
 
 
 <?php
+    //-- Income submit - expense
+
     if (isset($_POST["income-submit"])){
 
         if (isset($_POST['money-income'])) {
@@ -368,7 +496,6 @@
         include("connectdb.php");
         
         try {
-            
             //gets the user id from the user email stored in session data
             $userid = $db->prepare("SELECT id FROM user WHERE email = ?");
             $userid->execute(array($_SESSION['username']));
@@ -394,7 +521,7 @@
             exit;
         }
         catch (PDOException $ex) {
-            echo("<h4 class='notification'> Error - Failed to connect to the database.<br /> </h4>");
+            echo("<h4 class='warning'> Error - Failed to connect to the database.<br /> </h4>");
             echo($ex->getMessage());
             exit;
     
@@ -402,7 +529,7 @@
         
     }
     
-    
+    //-- Income submit - expense
     if (isset($_POST["expense-submit"])){
 
         if (isset($_POST['money-expense'])) {
@@ -463,7 +590,7 @@
             exit;
         }
         catch (PDOException $ex) {
-            echo("<h4 class='notification'> Error - Failed to connect to the database.<br /> </h4>");
+            echo("<h4 class='warning'> Error - Failed to connect to the database.<br /> </h4>");
             echo($ex->getMessage());
             exit;
     
