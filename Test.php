@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <!-- Chart library -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
+    </head>
     <style>
         /* Palette colours: 22223b, 4a4e69, f2e9e4, 9a8c98, c9ada7*/
         :root {
@@ -200,21 +204,26 @@
                 $userid->execute(array($_SESSION['username']));
                 //gets the first row of pdo object
                 $user = $userid->fetch();
+                //echo $user['id'] . ' --- ';
                 
                 //get category id from database
-                $qry = $db->prepare("SELECT categories.categoryName, SUM(expense.amount) AS total FROM expenses INNER JOIN categories ON expense.categoryID = categories.categoryID WHERE userID = :userid");
+                $qry = $db->prepare("SELECT categories.categoryName, SUM(expense.amount) AS total FROM expense INNER JOIN categories ON expense.categoryID=categories.categoryID WHERE expense.userID = :userid GROUP BY categories.categoryName");
                 $qry->bindParam(':userid', $user['id'], PDO::PARAM_STR);
+                $qry->execute();
+                echo $qry->rowCount();
+
+                $i= 0;
                 
                 //data structure
                 $data = array();
                 while ($row = $qry->fetch(PDO::FETCH_ASSOC)){
-                    echo($row['categoryName']);
-                    echo($row['total']);
                     $data[] = array(
                         'category' => $row['categoryName'],
                         'total' => $row['total']
                     );
                 }
+                
+                echo json_encode($data);
                 
                 exit;
             }
@@ -234,19 +243,18 @@
                 "#00aba9",
                 "#2b5797",
                 "#e8c3b9",
-                "#1e7145"
+                "#1e7145",
             ];
+            console.log("test");
             
             //gets the drawing functions to draw on canvas 
-            var context = document.getElementById("pieChart").getContext("2d");
-            var myChart = new Chart(context, {
+            var myChart = new Chart("pieChart", {
                 type: 'pie',
                 data: {
                     labels: data.map(item => item.category),
                     dataset:[{
                         backgroundColor: barColors,
                         data: data.map(item => item.total),
-                        borderWidth: 1
                     }]
                 },
                 options: {
@@ -254,6 +262,37 @@
                     maintainAspectRatio: false
                 }
             });
+        </script>
+
+        <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+
+        <script>
+        var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+        var yValues = [55, 49, 44, 24, 15];
+        var barColors = [
+        "#b91d47",
+        "#00aba9",
+        "#2b5797",
+        "#e8c3b9",
+        "#1e7145"
+        ];
+
+        new Chart("pieChart", {
+        type: "pie",
+        data: {
+            labels: xValues,
+            datasets: [{
+            backgroundColor: barColors,
+            data: yValues
+            }]
+        },
+        options: {
+            title: {
+            display: true,
+            text: "World Wide Wine Production 2018"
+            }
+        }
+        });
         </script>
     </body>
 

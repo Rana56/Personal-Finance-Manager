@@ -104,7 +104,7 @@
                         <span class="material-icons-round">payments</span>
                         <div class="middle">
                             <div class="left">
-                                <h3>Remaining Budget</h3>
+                                <h3>Balance</h3>
                                 <h1>£200.00</h1>   
                             </div>
                             <div class="progress">

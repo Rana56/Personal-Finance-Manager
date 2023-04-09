@@ -36,6 +36,7 @@
             <img src='' class="card-img"></img>
             -->
 
+            <!--This holds the card information-->
             <?php
             include_once("connectdb.php");
             try {
@@ -50,12 +51,17 @@
                         $text = $row["text"];
                         $link = $row["link"];
                         ?>
-                        <!--This holds the card information-->
+                        
                         <div class="card">
                             <div class="card-img" style="background-image: url(<?= $image ?>);"></div>
-                            <h2> <?= $title ?> </h2>
-                            <p> <?= $text ?> </p>
-                            <a href="<?= $link ?>">Read More</a>
+                            <div class="card-content">
+                                <h3> <?= $title ?> </h3>
+                                <p> <?= $text ?> </p>
+                                
+                            </div>
+                            <div class="card-link">
+                                    <a href="<?= $link ?>">Read More</a>
+                            </div>
                             
                         </div>
 

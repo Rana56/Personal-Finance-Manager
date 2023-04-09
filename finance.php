@@ -33,9 +33,26 @@
                 $fname = $db->prepare("SELECT first_name FROM user WHERE email = ?");
                 $fname->execute(array($_SESSION['username']));
                 $fname = $fname->fetch();
+                //gets total income for current month
+
+                //gets the user id from the user email stored in session data
+                $userid = $db->prepare("SELECT id FROM user WHERE email = ?");
+                $userid->execute(array($_SESSION['username']));
+                //gets the first row of pdo object
+                $user = $userid->fetch();
+        
+                $qry_income = $db->prepare("SELECT SUM(amount) AS monthIncome FROM income WHERE userID = :userid AND MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE())");
+                $qry_income->bindParam(':userid', $user['id'], PDO::PARAM_STR);
+                $qry_income->execute();
+                $qry_income = $qry_income->fetch();
+        
+                //data structure
+                $incomeMonth = $qry_income['monthIncome'];
+
             } catch (PDOException $ex) {
                 echo $ex;
             }
+
         ?>
         
         <!------------ Header ------------>
@@ -366,78 +383,22 @@
                     </div>
                 </div>
 
-                <!-- Budget Content -->
-                <div class="budget-goals">
+                <!-- Spending Graphs -->
+                <div class="spending-stats">
                     <h2>Spending</h2>
-                    <canvas id="pieChart" style="width:100%;max-width:600px"></canvas>
-                    <?php
-                        //include_once("php/financeGraph.php");
-                    ?>
+                    <h3>Total spendings for each category (£)</h3>
+                    <canvas id="pieChart" style="width:100%;max-width:350px" aria-label="Element not supported"></canvas>
 
-<script>
-var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-var yValues = [55, 49, 44, 24, 15];
-var barColors = [
-  "#b91d47",
-  "#00aba9",
-  "#2b5797",
-  "#e8c3b9",
-  "#1e7145"
-];
-
-new Chart("pieChart", {
-  type: "pie",
-  data: {
-    labels: xValues,
-    datasets: [{
-      backgroundColor: barColors,
-      data: yValues
-    }]
-  },
-  options: {
-    title: {
-      display: false,
-      text: "World Wide Wine Production 2018"
-    }
-  }
-});
-</script>
-                    
-                    <a href="#">Show All</a>
                 </div>
 
                 <!-- Tracking Content -->
                 <div class="tracking-content">
-                    <h2>Trackings</h2>
-                    <div class="trackings">
-                        <div class="item">
-                            <!--
-                            <div class="info">
-                                <h3>Item Name</h3>
-                                <h4>£250</h4>
-                                <p><b>Price increase</b></p>
-                            </div>
-                            -->
-                            <div class="info">
-                                <h3>Item Name</h3>
-                                <h4>£250</h4>
-                                <p><b>Increase</b></p>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="info">
-                                <h3>Item Name</h3>
-                                <h4>£250</h4>
-                                <p><b>Decrease</b></p>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="info">
-                                <h3>Item Name</h3>
-                                <h4>£250</h4>
-                                <p><b>No Change</b></p>
-                            </div>
-                        </div>
+                    <h2>Total Income</h2>
+                    
+                    <h3 id="totalInfo">Total Income for this month: 
+                        <span class="success">£<?= $incomeMonth?></span>
+                    </h3>
+                    <canvas id="lineGraph" style="width:100%;max-width:350px" aria-label="Element not supported"></canvas>
                         
                 </div>
 
@@ -452,6 +413,7 @@ new Chart("pieChart", {
     <script src="Scripts/colourToggle.js"></script>
     <script src="Scripts/financePopup.js"></script>
     <script src="Scripts/finance-delete.js"></script>
+    <script src="Scripts/finance-graph.js"></script>
     
 </html>
 
@@ -517,7 +479,6 @@ new Chart("pieChart", {
 
             $qstr->execute();
 
-            header("Location: accounts.php");
             exit;
         }
         catch (PDOException $ex) {
@@ -586,7 +547,6 @@ new Chart("pieChart", {
 
             $qstr->execute();
 
-            header("Location: finance.php");
             exit;
         }
         catch (PDOException $ex) {
