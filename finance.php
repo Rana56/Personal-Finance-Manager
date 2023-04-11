@@ -166,7 +166,7 @@
             <div class="popup" id="expensePopup">
                 <span class="material-icons-round" id="popup-close-expense">close</span>
                 <form class="form" method="post" action="finance.php">
-                    <h2>Enter <span style="color: #ad6d0d;">Expense</span></h2>
+                    <h2>Enter <span style="color: #9f212b;">Expense</span></h2>
                     <div class="form-element">
                         <label for="expense-money">Amount</label>
                         <input type="text" id="expense-money" placeholder="Enter Expense - e.g. 20.00" required name="money-expense">
@@ -216,7 +216,7 @@
                 <h1>Finance</h1>
 
                 <div class="income-expense-btn">
-                     <div class="add-product income" id="show-incomePopup">
+                    <div class="add-product income" id="show-incomePopup">
                         <div>
                             <a href="#" ></a>
                             <span class="material-icons-round active">add</span>
@@ -386,7 +386,7 @@
                 <!-- Spending Graphs -->
                 <div class="spending-stats">
                     <h2>Spending</h2>
-                    <h3>Total spendings for each category (£)</h3>
+                    <h3>Total spendings for each category this month</h3>
                     <canvas id="pieChart" style="width:100%;max-width:350px" aria-label="Element not supported"></canvas>
 
                 </div>
@@ -411,7 +411,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="Scripts/colourToggle.js"></script>
-    <script src="Scripts/financePopup.js"></script>
+    <script src="Scripts/finance-popup.js"></script>
     <script src="Scripts/finance-delete.js"></script>
     <script src="Scripts/finance-graph.js"></script>
     

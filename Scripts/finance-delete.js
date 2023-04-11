@@ -6,7 +6,7 @@ $(document).ready(function(){
     
         //AJAX request to remove row from database and update table
         $.ajax({
-            url: "php/removeFinanceData.php", 
+            url: "php/financeRemoveData.php", 
             method: "POST",
             data: {expense_id: expenseID},
             success: function(reponse) {
@@ -25,7 +25,7 @@ $(document).ready(function(){
     
         //AJAX request to remove row from database and update table
         $.ajax({
-            url: "php/removeFinanceData.php", 
+            url: "php/financeRemoveData.php", 
             method: "POST",
             data: {income_id: incomeID},
             success: function(reponse) {

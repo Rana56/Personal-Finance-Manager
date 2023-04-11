@@ -12,7 +12,7 @@
         $user = $userid->fetch();
         
         //get category id from database
-        $qry = $db->prepare("SELECT categories.categoryName, SUM(expense.amount) AS total FROM expense INNER JOIN categories ON expense.categoryID=categories.categoryID WHERE expense.userID = :userid GROUP BY categories.categoryName");
+        $qry = $db->prepare("SELECT categories.categoryName, SUM(expense.amount) AS total FROM expense INNER JOIN categories ON expense.categoryID=categories.categoryID WHERE expense.userID = :userid AND MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE()) GROUP BY categories.categoryName");
         $qry->bindParam(':userid', $user['id'], PDO::PARAM_STR);
         $qry->execute();
         

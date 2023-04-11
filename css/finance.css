@@ -15,7 +15,7 @@
     --colour-danger: #e75461;
     --colour-success: #31ad84;
     --colour-warning: #f0950e;
-    --colour-warking-dark: #ad6d0d;
+    --colour-warning-dark: #ad6d0d;
     --colour-info-dark: #39393d;
 
     --card-border-radius: 2rem;
@@ -518,7 +518,7 @@ main .recent-activity button {
 }
 
 main .recent-activity button:hover {
-    background-color: var(--colour-warking-dark);
+    background-color: var(--colour-warning-dark);
 }
 
 /* ---------- Right top content ---------- */

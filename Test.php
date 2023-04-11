@@ -223,7 +223,7 @@
                     );
                 }
                 
-                echo json_encode($data);
+                //echo json_encode($data);
                 
                 exit;
             }
@@ -235,65 +235,46 @@
             }
         ?>
 
-        <script>
-            //changes data into json data e.e. {"Peter":35,"Ben":37,"Joe":43}
-            var data = <?php echo json_encode($data); ?>;
-            var barColors = [
-                "#b91d47",
-                "#00aba9",
-                "#2b5797",
-                "#e8c3b9",
-                "#1e7145",
-            ];
-            console.log("test");
-            
-            //gets the drawing functions to draw on canvas 
-            var myChart = new Chart("pieChart", {
-                type: 'pie',
-                data: {
-                    labels: data.map(item => item.category),
-                    dataset:[{
-                        backgroundColor: barColors,
-                        data: data.map(item => item.total),
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false
+        <h1> test </h1>
+
+        <form>
+            <select name="category-income" id="budget-select" required>
+                <?php
+                include_once("connectdb.php");
+                try {
+                    $qry = $db->prepare("SELECT * FROM categories ORDER BY categoryName ASC");
+                    $qry->execute();
+                    
+                    //gets the user id from the user email stored in session data
+                    $userid = $db->prepare("SELECT id FROM user WHERE email = ?");
+                    $userid->execute(array($_SESSION['username']));
+                    //gets the first row of pdo object
+                    $user = $userid->fetch();
+    
+                    if ($qry->rowCount() > 0){                                     //checks if a rows are returned
+                        foreach ($qry as $row){                                         //loops trough queried object
+                            $category = $row["categoryName"];
+                            
+                            //check if category budget already added
+                            $check = $db->prepare("SELECT name FROM budgets WHERE userID = :userid and categoryID = :cID");
+                            $check->bindParam(':userid', $user['id'], PDO::PARAM_STR);
+                            $check->bindParam(':cID', $row['categoryID'], PDO::PARAM_STR);
+                            $check->execute();
+    
+                            if ($check->rowCount() == 0){
+                            }
+                            ?>
+                                <option value="<?=$category?>"><?=$category?></option>
+                            <?php
+                        }
+                    }
+                } catch (PDOException $ex) {
+                    echo $ex;
                 }
-            });
-        </script>
+                ?>
+            </select>
+        </form>
 
-        <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
-
-        <script>
-        var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-        var yValues = [55, 49, 44, 24, 15];
-        var barColors = [
-        "#b91d47",
-        "#00aba9",
-        "#2b5797",
-        "#e8c3b9",
-        "#1e7145"
-        ];
-
-        new Chart("pieChart", {
-        type: "pie",
-        data: {
-            labels: xValues,
-            datasets: [{
-            backgroundColor: barColors,
-            data: yValues
-            }]
-        },
-        options: {
-            title: {
-            display: true,
-            text: "World Wide Wine Production 2018"
-            }
-        }
-        });
-        </script>
     </body>
 
 </html>

@@ -250,6 +250,8 @@ header {
 
 .card .card-content p {
     padding-inline: 10px;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 .card .card-link a {

@@ -16,11 +16,6 @@
         $qry->bindParam(':userid', $user['id'], PDO::PARAM_STR);
         $qry->execute();
 
-        $qry_income = $db->prepare("SELECT SUM(amount) AS monthIncome FROM income WHERE userID = :userid AND MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE())");
-        $qry_income->bindParam(':userid', $user['id'], PDO::PARAM_STR);
-        $qry_income->execute();
-        $qry_income = $qry_income->fetch();
-
         //data structure
         $data = array();
         while ($row = $qry->fetch(PDO::FETCH_ASSOC)){
