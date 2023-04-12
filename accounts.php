@@ -29,6 +29,7 @@
                 $fname = $db->prepare("SELECT first_name FROM user WHERE email = ?");
                 $fname->execute(array($_SESSION['username']));
                 $fname = $fname->fetch();
+
             } catch (PDOException $ex) {
                 echo $ex;
             }
@@ -74,7 +75,7 @@
                         <span class="material-icons-round">assignment</span>
                         <h3>Budget</h3>
                     </a>
-                    <a href="#">
+                    <a href="accountTrack.php">
                         <span class="material-icons-round">insights</span>
                         <h3>Tracking</h3>
                     </a>
@@ -99,13 +100,57 @@
 
                 <div class="insights">
 
+                <?php             
+                    include_once("connectdb.php");
+
+                    try {
+                        //gets the user id from the user email stored in session data
+                        $userid = $db->prepare("SELECT id FROM user WHERE email = ?");
+                        $userid->execute(array($_SESSION['username']));
+                        //gets the first row of pdo object
+                        $user = $userid->fetch();
+
+                        //overall balance
+                        $balance_income = $db->prepare("SELECT SUM(amount) AS bIncome FROM income WHERE userID = :userid");
+                        $balance_income->bindParam(':userid', $user['id'], PDO::PARAM_STR);
+                        $balance_income->execute();
+                        $balance_income = $balance_income->fetch();
+
+                        $balance_expense = $db->prepare("SELECT SUM(amount) AS bExpense FROM expense WHERE userID = :userid");
+                        $balance_expense->bindParam(':userid', $user['id'], PDO::PARAM_STR);
+                        $balance_expense->execute();
+                        $balance_expense = $balance_expense->fetch();
+                        
+                        //total income for current month
+                        $qry_income = $db->prepare("SELECT SUM(amount) AS monthIncome FROM income WHERE userID = :userid AND MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE())");
+                        $qry_income->bindParam(':userid', $user['id'], PDO::PARAM_STR);
+                        $qry_income->execute();
+                        $qry_income = $qry_income->fetch();
+                        
+                        //total expense for current month
+                        $qry_expense = $db->prepare("SELECT SUM(amount) AS monthExpense FROM expense WHERE userID = :userid AND MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE())");
+                        $qry_expense->bindParam(':userid', $user['id'], PDO::PARAM_STR);
+                        $qry_expense->execute();
+                        $qry_expense = $qry_expense->fetch();
+                
+                        //data
+                        $incomeMonth = $qry_income['monthIncome'];
+                        $expenseMonth = $qry_expense['monthExpense'];
+                        $totalBalance = floatval($balance_income['bIncome']) - floatval($balance_expense['bExpense']);
+
+                    } catch (PDOException $ex) {
+                        echo $ex;
+                    }
+                ?>
+
+
                     <!-- Budget -->
                     <div class="remaining-budget">
                         <span class="material-icons-round">payments</span>
                         <div class="middle">
                             <div class="left">
                                 <h3>Balance</h3>
-                                <h1>£200.00</h1>   
+                                <h1>£<?=$totalBalance?></h1>   
                             </div>
                             <div class="progress">
                                 <svg>
@@ -116,7 +161,7 @@
                                 </div>
                             </div>
                         </div>
-                        <small class="text-muted">This month</small>
+                        <small class="text-muted">Overall</small>
                     </div>
 
                     <!-- Expenses -->
@@ -125,7 +170,7 @@
                         <div class="middle">
                             <div class="left">
                                 <h3>Total Expense</h3>
-                                <h1>£100.00</h1>   
+                                <h1>£<?=$expenseMonth?></h1>   
                             </div>
                             <div class="progress">
                                 <svg>
@@ -145,7 +190,7 @@
                         <div class="middle">
                             <div class="left">
                                 <h3>Total Income</h3>
-                                <h1>£300.00</h1>   
+                                <h1>£<?=$incomeMonth?></h1>   
                             </div>
                             <div class="progress">
                                 <svg>
@@ -209,6 +254,42 @@
                     </div>
                 </div>
 
+                <!-- Tracking Content -->
+                <div class="tracking-content">
+                    <h2>Progress</h2>
+                    <div class="trackings">
+                        <div class="item">
+                            <?php 
+                                            
+                                include_once("connectdb.php");
+                                include("php/accounts-stat.php");
+            
+                            ?>
+                            
+                        </div>
+
+                        <div class="item encourage">
+                            <span class="material-icons-round active">sentiment_very_satisfied</span>
+
+                            <?php
+                                include_once("connectdb.php");
+                                try {
+                                    
+                                    //gets random row
+                                    $qry = $db->prepare("SELECT * FROM encouragement ORDER BY RAND() LIMIT 1");
+                                    $qry->execute();
+                                    $sentence = $qry->fetch()['sentence'];
+
+                                    echo "<p>$sentence</p>";
+
+                                } catch (PDOException $ex) {
+                                    echo $ex;
+                                }
+                            ?>
+                        </div>    
+                    </div>
+                </div>
+
                 <!-- Budget Content -->
                 <div class="budget-goals">
                     <h2>Budget Goals</h2>
@@ -229,52 +310,17 @@
                             <p><b>1% </b></p>
                         </div>
                     </div>
-                    <a href="#">Show All</a>
-                </div>
 
-                <!-- Tracking Content -->
-                <div class="tracking-content">
-                    <h2>Trackings</h2>
-                    <div class="trackings">
-                        <div class="item">
-                            <!--
-                            <div class="info">
-                                <h3>Item Name</h3>
-                                <h4>£250</h4>
-                                <p><b>Price increase</b></p>
-                            </div>
-                            -->
-                            <div class="info">
-                                <h3>Item Name</h3>
-                                <h4>£250</h4>
-                                <p><b>Increase</b></p>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="info">
-                                <h3>Item Name</h3>
-                                <h4>£250</h4>
-                                <p><b>Decrease</b></p>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="info">
-                                <h3>Item Name</h3>
-                                <h4>£250</h4>
-                                <p><b>No Change</b></p>
-                            </div>
-                        </div>
-                        <div class="item add-product">
-                            <div>
-                                <a href="#"></a>
-                                <span class="material-icons-round active">add</span>
-                                <h3>Add Product</h3>
-                            </div>
+                    <div class="item add-product">
+                        <div>
+                            <a href="#"></a>
+                            <span class="material-icons-round active">add</span>
+                            <h3>Add Budget</h3>
                         </div>
                     </div>
-
-                    <a href="#">Show All</a>
                 </div>
+
+
 
             </div>
 

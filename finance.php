@@ -89,7 +89,7 @@
                         <span class="material-icons-round">grid_view</span>
                         <h3>Overview</h3>
                     </a>
-                    <a href="#" class="active">
+                    <a href="finance.php" class="active">
                         <span class="material-icons-round">person_outline</span>
                         <h3>Finance</h3>
                     </a>
@@ -97,7 +97,7 @@
                         <span class="material-icons-round">assignment</span>
                         <h3>Budget</h3>
                     </a>
-                    <a href="#">
+                    <a href="accountTrack.php">
                         <span class="material-icons-round">insights</span>
                         <h3>Tracking</h3>
                     </a>

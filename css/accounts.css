@@ -389,13 +389,13 @@ main .insights .remaining-budget svg circle{
 }
 
 main .insights .expense svg circle{
-    stroke-dasharray: 110;
     stroke-dashoffset: 22;
+    stroke: var(--colour-danger);
 }
 
 main .insights .income svg circle{
-    stroke-dasharray: 190;
     stroke-dashoffset: 92;
+    stroke: var(--colour-success);
 }
 
 main .insights .progress .number {
@@ -549,6 +549,48 @@ main .recent-activity a {
     font-weight: 600;
 }
 
+.right .budget-goals .item {
+    background-color: var(--bg-light);
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding: 1.4rem var(--card-padding);
+    border-radius: var(--border-radius-3);
+    box-shadow: var(--box-shadow);
+    transition: all 350ms ease;
+}
+
+.right .budget-goals .item:hover {
+    box-shadow: none;
+}
+
+.right .budget-goals .item .info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+}
+
+.right .budget-goals .add-product {
+    background-color: transparent;
+    border: 2.5px dashed var(--bg-3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.right .budget-goals .add-product div {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+hr.dashed {
+    border-top: 3px dashed var(--bg);
+  }
+
 /* ---------- Right tracking content ---------- */
 .right .tracking-content {
     margin-top: 2rem;
@@ -558,9 +600,9 @@ main .recent-activity a {
     margin-bottom: 1rem;
 }
 
-.right .tracking-content .item {
+.right .tracking-content .trackings .item {
     background-color: var(--bg-light);
-    align-items: center;
+    text-align: center;
     gap: 1rem;
     margin-bottom: 1rem;
     padding: 1.4rem var(--card-padding);
@@ -595,12 +637,16 @@ main .recent-activity a {
     gap: 0.6rem;
 }
 
-.right .tracking-content a {
-    text-align: center;
-    display: block;
-    margin: 1rem auto;
-    color: var(--links);
-    font-weight: 600;
+.right .tracking-content .trackings .encourage {
+    margin-top: 1rem;
+}
+
+.item h3 {
+    margin: 1rem
+}
+
+.item p{
+    margin: 2rem;
 }
 
 /* ---------- Media Query ---------- */

@@ -74,4 +74,13 @@
             ?>
             
         </section>
+
+        <!-- Footer -->
+        <footer>
+            <h3>Cash Control</h3>
+            <p>Built By Chirag</p>
+            <a href="#top">Back to top</a>
+        </footer>
+        
+    </body>
 </html>
