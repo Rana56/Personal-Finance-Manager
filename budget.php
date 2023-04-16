@@ -178,7 +178,7 @@
                     </h3>
                     
                     <div class="budgetGraph">
-                        <canvas id="currentBalance" style="width:100%;max-width:700px" aria-label="Element not supported"></canvas>
+                        <canvas id="currentBalance" style="width:100%;max-width:auto;" aria-label="Element not supported"></canvas>
                     </div>
                 </div>
 

@@ -305,15 +305,105 @@ main {
 
 main .date {
     display: inline-block;
-    background-color: var(--bg-light);
+    
     border-radius: var(--border-radius-1);
-    margin-top: 1rem;
+    
     padding: 0.5rem 1.6rem;
 }
 
 main .date input[type='date']{
     background: transparent;
     color: var(--bg);
+}
+
+.dropdown {
+    margin-top: 1rem;
+    max-width: 11rem;
+}
+
+.dropdown * {
+    box-sizing: border-box;
+}
+
+.dropdown .select {
+    background-color: var(--bg-light);
+    color: var(--bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px --bg-3 solid;
+    border-radius: 1rem;
+    padding: 1em;
+    cursor: pointer;
+    transition: backgroud 0.3s;
+    max-width: 11rem;
+    border: 2px var(--links) solid;
+}
+
+.dropdown .select-clicked {
+    border: 2px var(--links) solid;
+    box-shadow: 0 0 0.8rem var(--text-3);
+}
+
+.dropdown .select:hover{
+    background: #c9c6cc;
+}
+
+.dropdown .caret {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid var(--bg);
+    transition: 0.3s;
+}
+
+.dropdown .caret-rotate{
+    transform: rotate(180deg);
+}
+
+.dropdown .menu {
+    list-style: none;
+    padding: 0.2em 0.5em;
+    background: var(--bg-light);
+    border: 1px #cfbbe3 solid;
+    box-shadow: 0 0 0.8rem var(--text-3);
+    border-radius: 0.5em;
+    color: var(--bg);
+    position: absolute;
+    left: 25.5%;
+    width: 100%;
+    transform: translateX(-50%);
+    opacity: 0;
+    display: none;
+    transition: 0.2s;
+    max-width: 11rem;
+    margin-top: .5rem;
+    z-index: 3;
+}
+
+.dropdown .menu li {
+    padding: 0.7em 0.5em;
+    margin: 0.3em 0;
+    border-radius: 0.5em;
+    cursor: pointer;
+}
+
+.dropdown .menu li:hover {
+    background: #c9c6cc;
+}
+
+.dropdown .menu .active {
+    background: #ae99c3;
+}
+
+.dropdown .menu-open {
+    display: block;
+    opacity: 1;
+}
+
+.dropdown a {
+    display: block;
 }
 
 main .insights {
@@ -384,7 +474,6 @@ main .insights svg circle{
 }
 
 main .insights .remaining-budget svg circle{
-    stroke-dasharray: 110;
     stroke-dashoffset: 92;
 }
 
@@ -445,13 +534,14 @@ main table thead th {
 
 main table tbody td {
     height: 2.8rem;
-    border-bottom: 1px solid var(--bg-3);
+    border: none;
     color: var(--bg);
     font-size: medium;
 }
 
 main table tbody tr:last-child td {
-    border: none;
+    
+    border-bottom: 1px solid var(--bg-3);
 }
 
 main .recent-activity a {
@@ -513,6 +603,26 @@ main .recent-activity a {
     margin-right: 1rem;
 }
 
+/* ---------- Right budget scrollbar ---------- */
+.right .budget-goals .goals::-webkit-scrollbar{
+    width: 10px;
+    padding-left: 5px;
+}
+
+.right .budget-goals .goals::-webkit-scrollbar-track {
+    background-color: var(--account-bg);
+    border-radius: 10px;
+}
+
+.right .budget-goals .goals::-webkit-scrollbar-thumb {
+    background: #c9c6cc; 
+    border-radius: 10px;
+}
+
+.right .budget-goals .goals::-webkit-scrollbar-thumb:hover {
+    background: #9b92a4;  
+}
+
 /* ---------- Right budget content ---------- */
 .right .budget-goals {
     margin-top: 1.5rem;
@@ -528,6 +638,8 @@ main .recent-activity a {
     border-radius: var(--card-border-radius);
     box-shadow: var(--box-shadow);
     transition: all 350ms ease;
+    max-height: 20rem;
+    overflow: auto;
 }
 
 .right .budget-goals .goals:hover {
@@ -575,10 +687,16 @@ main .recent-activity a {
 .right .budget-goals .add-product {
     background-color: transparent;
     border: 2.5px dashed var(--bg-3);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    border-radius: var(--border-radius-3);
+    box-shadow: var(--box-shadow);
+    padding: 1.4rem var(--card-padding);
+    transition: all 350ms ease;
 }
 
 .right .budget-goals .add-product div {
@@ -607,7 +725,7 @@ hr.dashed {
     margin-bottom: 1rem;
     padding: 1.4rem var(--card-padding);
     border-radius: var(--border-radius-3);
-    box-shadow: var(--box-shadow);
+    box-shadow: 0.1rem 0.01rem 1.5rem #dfd7e6;
     transition: all 350ms ease;
 }
 

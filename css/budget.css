@@ -617,6 +617,27 @@ main .trackedBudget small{
     transition: all 350ms ease;
 }
 
+
+/* ---------- Right budget scrollbar ---------- */
+.right .budget-note .notes::-webkit-scrollbar{
+    width: 10px;
+    padding-left: 5px;
+}
+
+.right .budget-note .notes::-webkit-scrollbar-track {
+    background-color: var(--account-bg);
+    border-radius: 10px;
+}
+
+.right .budget-note .notes::-webkit-scrollbar-thumb {
+    background: #c9c6cc; 
+    border-radius: 10px;
+}
+
+.right .budget-note .notes::-webkit-scrollbar-thumb:hover {
+    background: #9b92a4;  
+}
+
 /* ---------- Right budget content ---------- */
 .right .budget-note {
     margin-top: 1.4rem;
@@ -639,7 +660,7 @@ main .trackedBudget small{
     margin-bottom: 1rem;
     padding: 1.4rem 1rem;
     border-radius: var(--border-radius-3);
-    box-shadow: 0 .1rem 3rem #dfd7e6;
+    box-shadow: 0.1rem 0.01rem 0.5rem #dfd7e6;
     transition: all 350ms ease;
 
     display: grid;

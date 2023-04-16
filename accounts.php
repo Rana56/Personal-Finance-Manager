@@ -94,71 +94,76 @@
             <main>
                 <h1>Account Overview</h1>
 
-                <div class="date">
-                    <input type="date">
+                <div class="dropdown">
+                    <div class="select">
+                        <span class="selected">
+                            <b>This Month</b>
+                        </span>
+                        <div class="caret"></div>
+                    </div>
+                    <ul class="menu">
+                        <li><a href="#" onclick="loadFilter('week')">This Week</a></li>
+                        <li class="active"><a href="#" onclick="loadFilter('month')">This Month</a></li>
+                        <li><a href="#" onclick="loadFilter('year')">This Year</a></li>
+                        <li><a href="#" onclick="loadFilter('all')">All</a></li>
+                    </ul>
                 </div>
 
                 <div class="insights">
-
-                <?php             
-                    include_once("connectdb.php");
-
-                    try {
-                        //gets the user id from the user email stored in session data
-                        $userid = $db->prepare("SELECT id FROM user WHERE email = ?");
-                        $userid->execute(array($_SESSION['username']));
-                        //gets the first row of pdo object
-                        $user = $userid->fetch();
-
-                        //overall balance
-                        $balance_income = $db->prepare("SELECT SUM(amount) AS bIncome FROM income WHERE userID = :userid");
-                        $balance_income->bindParam(':userid', $user['id'], PDO::PARAM_STR);
-                        $balance_income->execute();
-                        $balance_income = $balance_income->fetch();
-
-                        $balance_expense = $db->prepare("SELECT SUM(amount) AS bExpense FROM expense WHERE userID = :userid");
-                        $balance_expense->bindParam(':userid', $user['id'], PDO::PARAM_STR);
-                        $balance_expense->execute();
-                        $balance_expense = $balance_expense->fetch();
-                        
-                        //total income for current month
-                        $qry_income = $db->prepare("SELECT SUM(amount) AS monthIncome FROM income WHERE userID = :userid AND MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE())");
-                        $qry_income->bindParam(':userid', $user['id'], PDO::PARAM_STR);
-                        $qry_income->execute();
-                        $qry_income = $qry_income->fetch();
-                        
-                        //total expense for current month
-                        $qry_expense = $db->prepare("SELECT SUM(amount) AS monthExpense FROM expense WHERE userID = :userid AND MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE())");
-                        $qry_expense->bindParam(':userid', $user['id'], PDO::PARAM_STR);
-                        $qry_expense->execute();
-                        $qry_expense = $qry_expense->fetch();
-                
-                        //data
-                        $incomeMonth = $qry_income['monthIncome'];
-                        $expenseMonth = $qry_expense['monthExpense'];
-                        $totalBalance = floatval($balance_income['bIncome']) - floatval($balance_expense['bExpense']);
-
-                    } catch (PDOException $ex) {
-                        echo $ex;
-                    }
-                ?>
-
-
                     <!-- Budget -->
-                    <div class="remaining-budget">
-                        <span class="material-icons-round">payments</span>
-                        <div class="middle">
-                            <div class="left">
-                                <h3>Balance</h3>
-                                <h1>£<?=$totalBalance?></h1>   
-                            </div>
-                            <div class="progress">
+                    <!-- <div class="progress">
                                 <svg>
                                     <circle cx='38' cy="38" r="36"></circle>
                                 </svg>
                                 <div class="number">
                                     <p>20%</p>
                                 </div>
+                            </div> -->
+
+                    <div class="remaining-budget">
+                        <span class="material-icons-round">payments</span>
+                        <div class="middle">
+                            <div class="left">
+                                <h3>Balance</h3>
+                                <?php             
+                                    include_once("connectdb.php");
+
+                                    try {
+                                        //gets the user id from the user email stored in session data
+                                        $userid = $db->prepare("SELECT id FROM user WHERE email = ?");
+                                        $userid->execute(array($_SESSION['username']));
+                                        //gets the first row of pdo object
+                                        $user = $userid->fetch();
+
+                                        //overall balance
+                                        $balance_income = $db->prepare("SELECT SUM(amount) AS bIncome FROM income WHERE userID = :userid");
+                                        $balance_income->bindParam(':userid', $user['id'], PDO::PARAM_STR);
+                                        $balance_income->execute();
+                                        $balance_income = $balance_income->fetch();
+
+                                        $balance_expense = $db->prepare("SELECT SUM(amount) AS bExpense FROM expense WHERE userID = :userid");
+                                        $balance_expense->bindParam(':userid', $user['id'], PDO::PARAM_STR);
+                                        $balance_expense->execute();
+                                        $balance_expense = $balance_expense->fetch();
+                                        
+                                        $totalBalance = floatval($balance_income['bIncome']) - floatval($balance_expense['bExpense']);
+                                        if($totalBalance < 0){
+                                            echo "<h1 class='danger'>£$totalBalance</h1> ";
+                                        }
+                                        else {
+                                            echo "<h1 class='success'>£<$totalBalance</h1> ";
+                                        }
+
+                                    } catch (PDOException $ex) {
+                                        echo $ex;
+                                    }
+                                ?>
+                                  
+                            </div>
+                            <div class="progress">
+                                <svg>
+                                    <circle cx='38' cy="38" r="25"></circle>
+                                </svg>
                             </div>
                         </div>
                         <small class="text-muted">Overall</small>
@@ -170,18 +175,15 @@
                         <div class="middle">
                             <div class="left">
                                 <h3>Total Expense</h3>
-                                <h1>£<?=$expenseMonth?></h1>   
+                                <h1 id="filterExpense"></h1>   
                             </div>
                             <div class="progress">
                                 <svg>
-                                    <circle cx='38' cy="38" r="36"></circle>
+                                    <circle cx='38' cy="38" r="25"></circle>
                                 </svg>
-                                <div class="number">
-                                    <p>20%</p>
-                                </div>
                             </div>
                         </div>
-                        <small class="text-muted">This month</small>
+                        <small class="text-muted filterDetails">This month</small>
                     </div>
 
                     <!-- Expenses -->
@@ -190,18 +192,15 @@
                         <div class="middle">
                             <div class="left">
                                 <h3>Total Income</h3>
-                                <h1>£<?=$incomeMonth?></h1>   
+                                <h1 id="filterIncome"></h1>   
                             </div>
                             <div class="progress">
                                 <svg>
-                                    <circle cx='38' cy="38" r="36"></circle>
+                                    <circle cx='38' cy="38" r="25"></circle>
                                 </svg>
-                                <div class="number">
-                                    <p>20%</p>
-                                </div>
                             </div>
                         </div>
-                        <small class="text-muted">This month</small>
+                        <small class="text-muted filterDetails">This month</small>
                     </div>
                 </div>
 
@@ -211,28 +210,96 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Date</th>
-                                <th>Type</th>
                                 <th>Money</th>
+                                <th>Date</th>
+                                <th>Note</th>
+                                <th>Type</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Tesco</td>
-                                <td>24/3/2023</td>
-                                <td class="danger">Expense</td>
-                                <td class="warning">£20</td>
-                            </tr>
-                            <tr>
-                                <td>Test</td>
-                                <td>24/3/2023</td>
-                                <td class="danger">Expense</td>
-                                <td class="warning">£20</td>
-                            </tr>
+                        <?php
+                            include_once("connectdb.php");
+                            try {
+                                //gets the user id from the user email stored in session data
+                                $userid = $db->prepare("SELECT id FROM user WHERE email = ?");
+                                $userid->execute(array($_SESSION['username']));
+                                //gets the first row of pdo object
+                                $user = $userid->fetch();
+                                
+                                //gets data in descening - i.e. most recent
+                                $qry = $db->prepare("SELECT * FROM income where userID = :userid ORDER BY date DESC");
+                                $qry->bindParam(':userid', $user['id'], PDO::PARAM_STR);
+                                $qry->execute();
+
+                                if ($qry->rowCount() > 0 || $qryE->rowCount() > 0){                                     //checks if a rows are returned
+                                    $i = 0;
+
+                                    //loop 5 times or less
+                                    while (($row = $qry->fetch(PDO::FETCH_ASSOC)) && ($i < 4)){
+                                        $money = '£' . $row['amount'];
+                                        $date = $row['date'];
+                                        $note = $row['note'];
+                                        ?>
+
+                                        <tr>
+                                            <td  class="success"><?= $money ?></td>
+                                            <td><?= $date ?></td>
+                                            <td><?= $note ?></td>
+                                            <td class="success">Income</td>
+                                        </tr>
+
+                                        <?php
+                                        $i++;
+                                    }                                    
+                                }                                     
+                                else {
+                                    echo("<h4 class='warning'>Currently No Income Activties </h4>");
+                                }
+                            } catch (PDOException $ex) {
+                                echo $ex;
+                            }
+                        ?>
+                        </tbody>
+                        <tbody>
+                        <?php
+                            try {
+                                //expense recent
+                                $qryE = $db->prepare("SELECT * FROM expense where userID = :userid ORDER BY date DESC");
+                                $qryE->bindParam(':userid', $user['id'], PDO::PARAM_STR);
+                                $qryE->execute();
+
+                                if ($qry->rowCount() > 0 || $qryE->rowCount() > 0){                                     //checks if a rows are returned
+                                    $i = 0;
+
+                                    while (($row = $qryE->fetch(PDO::FETCH_ASSOC)) && ($i < 4)){
+                                        $money = '£' . $row['amount'];
+                                        $date = $row['date'];
+                                        $note = $row['note'];
+                                        ?>
+
+                                        <tr>
+                                            <td  class="danger"><?= $money ?></td>
+                                            <td><?= $date ?></td>
+                                            <td><?= $note ?></td>
+                                            <td class="danger">Expense</td>
+                                        </tr>
+
+                                        <?php
+                                        $i++;
+                                    }
+                                    
+                                }                                     
+                                else {
+                                    echo("<h4 class='warning'>Currently No Activties </h4>");
+                                }
+                            } catch (PDOException $ex) {
+                                echo $ex;
+                            }
+                        ?>
                         </tbody>
                     </table>
-                    <a href="#">Show All</a>
+
+                    <a href="finance.php">Show All</a>
                 </div>
 
             </main>
@@ -259,11 +326,79 @@
                     <h2>Progress</h2>
                     <div class="trackings">
                         <div class="item">
+                            <h3>This month</h3>
+                            <hr class='dashed'>
                             <?php 
                                             
                                 include_once("connectdb.php");
-                                include("php/accounts-stat.php");
-            
+                                try {                                    
+                                    //total income for last month
+                                    $lastIncome = $db->prepare("SELECT SUM(amount) AS lastmonthIncome FROM income WHERE userID = :userid AND MONTH(date) = MONTH(CURRENT_DATE() - INTERVAL 1 MONTH) AND YEAR(date) = YEAR(CURRENT_DATE())");
+                                    $lastIncome->bindParam(':userid', $user['id'], PDO::PARAM_STR);
+                                    $lastIncome->execute();
+                                    $lastIncome = $lastIncome->fetch();
+                                    
+                                    //total expense for last month
+                                    $lastExpense = $db->prepare("SELECT SUM(amount) AS lastmonthExpense FROM expense WHERE userID = :userid AND MONTH(date) = MONTH(CURRENT_DATE() - INTERVAL 1 MONTH) AND YEAR(date) = YEAR(CURRENT_DATE())");
+                                    $lastExpense->bindParam(':userid', $user['id'], PDO::PARAM_STR);
+                                    $lastExpense->execute();
+                                    $lastExpense = $lastExpense->fetch();
+
+                                    //total income for current month
+                                    $qry_income = $db->prepare("SELECT SUM(amount) AS monthIncome FROM income WHERE userID = :userid AND MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE())");
+                                    $qry_income->bindParam(':userid', $user['id'], PDO::PARAM_STR);
+                                    $qry_income->execute();
+                                    $qry_income = $qry_income->fetch();
+                                    
+                                    //total expense for current month
+                                    $qry_expense = $db->prepare("SELECT SUM(amount) AS monthExpense FROM expense WHERE userID = :userid AND MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE())");
+                                    $qry_expense->bindParam(':userid', $user['id'], PDO::PARAM_STR);
+                                    $qry_expense->execute();
+                                    $qry_expense = $qry_expense->fetch();
+                            
+                                    //data
+                                    $incomeMonth = $qry_income['monthIncome'];
+                                    $expenseMonth = $qry_expense['monthExpense'];
+                            
+                                    //data
+                                    $lastincomeMonth = floatval($lastIncome['lastmonthIncome']);
+                                    $lastexpenseMonth = floatval($lastExpense['lastmonthExpense']);
+                                    
+                                    if ($lastincomeMonth == 0){
+                                        $incomeChange = 0;
+                                    }
+                                    else{
+                                        $incomeChange = (($incomeMonth - $lastincomeMonth) / $lastincomeMonth) * 100;
+                                    }
+                                    
+                                    if ($lastexpenseMonth == 0){
+                                        $expenseChange = 0;
+                                    } 
+                                    else {
+                                        $expenseChange = (($incomeMonth - $lastincomeMonth) / $lastincomeMonth) * 100;
+                                    }
+
+                                    $incomeStat = number_format($incomeChange, 1);
+                                    $expenseStat = number_format($expenseChange, 1);
+                                    
+                                    //$incomeInfo = "<h3>Income Change: <span class='danger'>'$incomeChange'%<h3>";
+
+                                    if($incomeChange < 0){
+                                        echo "<h3>Income Decreased By: <span class='danger'>$incomeStat% </span><h3>";
+                                    } else {
+                                        echo "<h3>Income Increased By: <span class='success'>$incomeStat% </span><h3>";
+                                    }
+
+                                    if($expenseChange < 0){
+                                        echo "<h3>Expense Decreased By: <span class='success'>$expenseStat% </span><h3>";
+                                    } else {
+                                        echo "<h3>Expense Increased By: <span class='danger'>$expenseStat% </span><h3>";
+                                    }
+                            
+                                } catch (PDOException $ex) {
+                                    echo $ex;
+                                }
+
                             ?>
                             
                         </div>
@@ -292,41 +427,33 @@
 
                 <!-- Budget Content -->
                 <div class="budget-goals">
-                    <h2>Budget Goals</h2>
-                    <div class="goals">
-                        <div class="goal">
-                            <h3>Goal Name</h3>
-                            <h4>£250 / £350</h4>
-                            <p><b>71% </b></p>
-                        </div>
-                        <div class="goal">
-                            <h3>Goal Name</h3>
-                            <h4>£50 / £450</h4>
-                            <p><b>71% </b></p>
-                        </div>
-                        <div class="goal">
-                            <h3>Goal Name</h3>
-                            <h4>£30 / £10050</h4>
-                            <p><b>1% </b></p>
-                        </div>
+                    <h2>Budgets</h2>
+                    <div class="goals">                      
+                        <?php
+                            include_once("connectdb.php");
+                            
+                            include("php/accountBudgetLoad.php")
+                        ?>
                     </div>
 
-                    <div class="item add-product">
+                    <div class="add-product" onclick="window.location.href='budget.php'">
                         <div>
-                            <a href="#"></a>
+                            <a href="budget.php"></a>
                             <span class="material-icons-round active">add</span>
                             <h3>Add Budget</h3>
                         </div>
                     </div>
                 </div>
 
-
-
             </div>
 
         </div> 
     </body>
 
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script src="Scripts/colourToggle.js"></script>
+    <script src="Scripts/account-dropdown.js"></script>
     <!-- <script src="Scripts/accountFunctions.js"></script> -->
 </html>
