@@ -19,7 +19,7 @@
                 <ul>
                     <li><a href="index.php">Home</a></li>
                     <li><a href="savings.php">Savings</a></li>
-                    <li><a href="trackings.php">Tracking</a></li>
+                    <!--<li><a href="trackings.php">Tracking</a></li>-->
                     <li class="dropdown">
                         <div class="dropdownMain">
                             <a href="#">Account</a>
@@ -50,7 +50,7 @@
                 <ul>
                     <li><a href="index.php">Home</a></li>
                     <li><a href="savings.php">Savings</a></li>
-                    <li><a href="trackings.php">Tracking</a></li>
+                    <!--<li><a href="trackings.php">Tracking</a></li>-->
                     <li id="login"><a href="login.php">Login</a></li>
                     <li id="register"><a href="signup.php">Sign Up</a></li>
                 </ul>

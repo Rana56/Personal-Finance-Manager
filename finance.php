@@ -65,7 +65,7 @@
                 <ul>
                     <li><a href="index.php">Home</a></li>
                     <li><a href="savings.php">Savings</a></li>
-                    <li><a href="trackings.php">Tracking</a></li>
+                    <!--<li><a href="trackings.php">Tracking</a></li>-->
                     <li id="logout"><a href="logout.php">Logout</a></li>
                 </ul>
             </div>
@@ -101,10 +101,11 @@
                         <span class="material-icons-round">insights</span>
                         <h3>Goals</h3>
                     </a>
+                    <!--
                     <a href="#">
                         <span class="material-icons-round">settings</span>
                         <h3>Settings</h3>
-                    </a>
+                    </a> -->
                     <a href="logout.php">
                         <span class="material-icons-round">logout</span>
                         <h3>Logout</h3>
