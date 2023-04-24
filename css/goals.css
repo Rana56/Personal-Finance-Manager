@@ -537,6 +537,18 @@ main .recent-activity a {
     font-weight: 600;
 }
 
+main .recent-activity button {
+    color: whitesmoke;
+    background-color: #d5662b;
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.167s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    padding: 8px 12px;
+    border-radius: 100px;
+}
+
+main .recent-activity button:hover {
+    background-color: rgb(160, 77, 33)
+}
+
 /* ---------- Right top content ---------- */
 
 .right {

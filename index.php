@@ -98,7 +98,7 @@
     
     </body>
 
-    <script src="Scripts/wordType.js"></script>
-    <script src="Scripts/slideshow.js"></script>
-    <script src="Scripts/homeButtons.js"></script>
+    <script src="Scripts/home-wordType.js"></script>
+    <script src="Scripts/home-slideshow.js"></script>
+    <script src="Scripts/home-buttons.js"></script>
 </html>

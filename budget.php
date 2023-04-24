@@ -93,9 +93,9 @@
                         <span class="material-icons-round">assignment</span>
                         <h3>Budget</h3>
                     </a>
-                    <a href="accountTrack.php">
+                    <a href="goals.php">
                         <span class="material-icons-round">insights</span>
-                        <h3>Tracking</h3>
+                        <h3>Goals</h3>
                     </a>
                     <a href="#">
                         <span class="material-icons-round">settings</span>

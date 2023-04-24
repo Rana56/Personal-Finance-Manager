@@ -303,6 +303,105 @@ main {
     margin-top: 1.4rem;
 }
 
+.dropdown {
+    margin-top: 1rem;
+    max-width: 11rem;
+}
+
+.dropdown * {
+    box-sizing: border-box;
+}
+
+.dropdown .select {
+    background-color: var(--bg-light);
+    color: var(--bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px --bg-3 solid;
+    border-radius: 1rem;
+    padding: 1em;
+    cursor: pointer;
+    transition: backgroud 0.3s;
+    max-width: 11rem;
+    border: 2px var(--links) solid;
+}
+
+.dropdown .select-clicked {
+    border: 2px var(--links) solid;
+    box-shadow: 0 0 0.8rem var(--text-3);
+}
+
+.dropdown .select:hover{
+    background: #c9c6cc;
+}
+
+.dropdown .caret {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid var(--bg);
+    transition: 0.3s;
+}
+
+.dropdown .caret-rotate{
+    transform: rotate(180deg);
+}
+
+.dropdown .menu {
+    list-style: none;
+    padding: 0.2em 0.5em;
+    background: var(--bg-light);
+    border: 1px #cfbbe3 solid;
+    box-shadow: 0 0 0.8rem var(--text-3);
+    border-radius: 0.5em;
+    color: var(--bg);
+    position: absolute;
+    left: 25.5%;
+    width: 100%;
+    transform: translateX(-50%);
+    opacity: 0;
+    display: none;
+    transition: 0.2s;
+    max-width: 11rem;
+    margin-top: .5rem;
+    z-index: 3;
+}
+
+.dropdown .menu li {
+    padding: 0.7em 0.5em;
+    margin: 0.3em 0;
+    border-radius: 0.5em;
+    cursor: pointer;
+}
+
+.dropdown .menu li:hover {
+    background: #c9c6cc;
+}
+
+.dropdown .menu .active {
+    background: #ae99c3;
+}
+
+.dropdown .menu-open {
+    display: block;
+    opacity: 1;
+}
+
+.dropdown a {
+    display: block;
+}
+
+main .spending-stats {
+    margin-top: 1rem;
+}
+
+main .spending-stats h2 {
+    margin-bottom: 1rem;
+}
+
+
 main .income-expense-btn {
     display: flex;
     margin-top: 1rem;

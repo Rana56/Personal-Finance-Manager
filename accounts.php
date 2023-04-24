@@ -75,9 +75,9 @@
                         <span class="material-icons-round">assignment</span>
                         <h3>Budget</h3>
                     </a>
-                    <a href="accountTrack.php">
+                    <a href="goals.php">
                         <span class="material-icons-round">insights</span>
-                        <h3>Tracking</h3>
+                        <h3>Goals</h3>
                     </a>
                     <a href="#">
                         <span class="material-icons-round">settings</span>
@@ -97,7 +97,7 @@
                 <div class="dropdown">
                     <div class="select">
                         <span class="selected">
-                            <b>This Month</b>
+                            This Month
                         </span>
                         <div class="caret"></div>
                     </div>
@@ -151,7 +151,7 @@
                                             echo "<h1 class='danger'>£$totalBalance</h1> ";
                                         }
                                         else {
-                                            echo "<h1 class='success'>£<$totalBalance</h1> ";
+                                            echo "<h1 class='success'>£$totalBalance</h1> ";
                                         }
 
                                     } catch (PDOException $ex) {
@@ -231,7 +231,7 @@
                                 $qry->bindParam(':userid', $user['id'], PDO::PARAM_STR);
                                 $qry->execute();
 
-                                if ($qry->rowCount() > 0 || $qryE->rowCount() > 0){                                     //checks if a rows are returned
+                                if ($qry->rowCount() > 0){                                     //checks if a rows are returned
                                     $i = 0;
 
                                     //loop 5 times or less
@@ -253,7 +253,7 @@
                                     }                                    
                                 }                                     
                                 else {
-                                    echo("<h4 class='warning'>Currently No Income Activties </h4>");
+                                    echo("<h4 class='warning' style='margin-bottom: 5px;'>Currently No Income Activties </h4>");
                                 }
                             } catch (PDOException $ex) {
                                 echo $ex;
@@ -268,7 +268,7 @@
                                 $qryE->bindParam(':userid', $user['id'], PDO::PARAM_STR);
                                 $qryE->execute();
 
-                                if ($qry->rowCount() > 0 || $qryE->rowCount() > 0){                                     //checks if a rows are returned
+                                if ($qryE->rowCount() > 0){                                     //checks if a rows are returned
                                     $i = 0;
 
                                     while (($row = $qryE->fetch(PDO::FETCH_ASSOC)) && ($i < 4)){
@@ -290,7 +290,7 @@
                                     
                                 }                                     
                                 else {
-                                    echo("<h4 class='warning'>Currently No Activties </h4>");
+                                    echo("<h4 class='warning' style='margin-bottom: 5px;'>Currently Expense Activties </h4>");
                                 }
                             } catch (PDOException $ex) {
                                 echo $ex;
@@ -454,6 +454,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="Scripts/colourToggle.js"></script>
-    <script src="Scripts/account-dropdown.js"></script>
+    <script src="Scripts/account-filter.js"></script>
     <!-- <script src="Scripts/accountFunctions.js"></script> -->
 </html>

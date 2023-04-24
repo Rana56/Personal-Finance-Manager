@@ -97,9 +97,9 @@
                         <span class="material-icons-round">assignment</span>
                         <h3>Budget</h3>
                     </a>
-                    <a href="accountTrack.php">
+                    <a href="goals.php">
                         <span class="material-icons-round">insights</span>
-                        <h3>Tracking</h3>
+                        <h3>Goals</h3>
                     </a>
                     <a href="#">
                         <span class="material-icons-round">settings</span>
@@ -215,6 +215,27 @@
             <main>
                 <h1>Finance</h1>
 
+                <div class="dropdown">
+                    <div class="select">
+                        <span class="selected">
+                            This Month
+                        </span>
+                        <div class="caret"></div>
+                    </div>
+                    <ul class="menu">
+                        <li><a href="#" onclick="loadFilter('week')">This Week</a></li>
+                        <li class="active"><a href="#" onclick="loadFilter('month')">This Month</a></li>
+                        <li><a href="#" onclick="loadFilter('year')">This Year</a></li>
+                        <li><a href="#" onclick="loadFilter('all')">All</a></li>
+                    </ul>
+                </div>
+
+                <div class="spending-stats" id="expenseGraphBox">
+                    <h2>Total Expense</h2>
+                    <h3 id="expenseText">Total expense for this month</h3>
+                    <canvas id="expenseChart" style="width:100%;max-width:500px;" aria-label="Element not supported"></canvas>
+                </div>
+
                 <div class="income-expense-btn">
                     <div class="add-product income" id="show-incomePopup">
                         <div>
@@ -289,7 +310,7 @@
                                     
                                 }                                     
                                 else {
-                                    echo("<h4 class='warning'>Currently no expenses</h4>");
+                                    echo("<h4 class='warning' style='margin-bottom: 5px;'>Currently no expenses</h4>");
                                 }
                             } catch (PDOException $ex) {
                                 echo $ex;
@@ -354,7 +375,7 @@
                                     
                                 }                                     
                                 else {
-                                    echo("<h4 class='warning'>Currently no Income </h4>");
+                                    echo("<h4 class='warning' style='margin-bottom: 5px;'>Currently no Income </h4>");
                                 }
                             } catch (PDOException $ex) {
                                 echo $ex;
@@ -384,21 +405,20 @@
                 </div>
 
                 <!-- Spending Graphs -->
-                <div class="spending-stats">
+                <div class="spending-stats" id="categoryGraph">
                     <h2>Spending</h2>
-                    <h3>Total spendings for each category this month</h3>
-                    <canvas id="pieChart" style="width:100%;max-width:350px" aria-label="Element not supported"></canvas>
-
+                    <h3 id="pieChartText">Total spendings for each category this month</h3>
+                    <canvas id="pieChart" style="width:100%;max-width:auto;" aria-label="Element not supported"></canvas>
                 </div>
 
                 <!-- Tracking Content -->
-                <div class="tracking-content">
+                <div class="tracking-content" id="incomeGraph">
                     <h2>Total Income</h2>
                     
                     <h3 id="totalInfo">Total Income for this month: 
                         <span class="success">£<?= $incomeMonth?></span>
                     </h3>
-                    <canvas id="lineGraph" style="width:100%;max-width:350px" aria-label="Element not supported"></canvas>
+                    <canvas id="lineGraph" style="width:100%;max-width:auto;" aria-label="Element not supported"></canvas>
                         
                 </div>
 
@@ -413,8 +433,7 @@
     <script src="Scripts/colourToggle.js"></script>
     <script src="Scripts/finance-popup.js"></script>
     <script src="Scripts/finance-delete.js"></script>
-    <script src="Scripts/finance-graph.js"></script>
-    
+    <script src="Scripts/finance-graph-filter.js"></script>
 </html>
 
 

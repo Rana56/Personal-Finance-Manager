@@ -8,7 +8,7 @@
         <!-- Icons -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 
-        <link rel="stylesheet" href="css/accountTrack.css">
+        <link rel="stylesheet" href="css/goals.css">
     </head>
 
     <body>
@@ -74,9 +74,9 @@
                         <span class="material-icons-round">assignment</span>
                         <h3>Budget</h3>
                     </a>
-                    <a href="accountTrack.php" class="active">
+                    <a href="goals.php" class="active">
                         <span class="material-icons-round">insights</span>
-                        <h3>Tracking</h3>
+                        <h3>Goals</h3>
                     </a>
                     <a href="#">
                         <span class="material-icons-round">settings</span>
@@ -91,23 +91,19 @@
 
             <!-- Main -->
             <main>
-                <h1>Trackings</h1>
-                <h2>Enter your product link to start tracking</h2>
+                <h1>Goals</h1>
+                <h2>Enter your goals</h2>
 
                 <div class="center">
                     <div class="track">
-                        <form class="form">
+                        <form class="form" id="goalForm">
                             <div class="form-element">
-                                <label for="itemName">Item Name</label>
-                                <input type="text" id="itemName" placeholder="Enter Item Name" required name="money-form">
+                                <label for="itemName">Goal Name</label>
+                                <input type="text" id="itemName" placeholder="Enter Goal Name" required name="goal-name">
                             </div>
                             <div class="form-element">
-                                <label for="url">URL</label>
-                                <input type="text" id="url" placeholder="Enter Amazon Item URL - e.g. https://www.amazon.co.uk" required name="money-form">
-                            </div>
-                            <div class="form-element">
-                                <label for="money">Amount</label>
-                                <input type="text" id="money" placeholder="Enter Alert Amount" required name="money-form">
+                                <label for="url">Note</label>
+                                <input type="text" id="url" placeholder="Enter details about your goals" required name="notes">
                             </div>
     
                             <button type="submit" name="submit-1">Add</button>
@@ -121,37 +117,64 @@
 
                 <!-- Recent Activities  -->
                 <div class="recent-activity">
-                    <h2>Tracked Items</h2>
+                    <h2>Goals</h2>
                     <table>
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Date</th>
-                                <th>Type</th>
-                                <th>Money</th>
+                                <th>Details</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Tesco</td>
-                                <td>24/3/2023</td>
-                                <td class="danger">Expense</td>
-                                <td class="warning">£20</td>
-                            </tr>
-                            <tr>
-                                <td>Test</td>
-                                <td>24/3/2023</td>
-                                <td class="danger">Expense</td>
-                                <td class="warning">£20</td>
-                            </tr>
+                        <?php
+                            include_once("connectdb.php");
+                            try {
+                                //gets the user id from the user email stored in session data
+                                $userid = $db->prepare("SELECT id FROM user WHERE email = ?");
+                                $userid->execute(array($_SESSION['username']));
+                                //gets the first row of pdo object
+                                $user = $userid->fetch();
+                                
+                                //gets data in descening - i.e. most recent
+                                $qry = $db->prepare("SELECT * FROM goals where userID = :userid");
+                                $qry->bindParam(':userid', $user['id'], PDO::PARAM_STR);
+                                $qry->execute();
+
+                                if ($qry->rowCount() > 0){                                     //checks if a rows are returned
+                                    $i = 0;
+
+                                    //loop 5 times or less
+                                    while (($row = $qry->fetch(PDO::FETCH_ASSOC))){
+                                        $goalID = $row['goal_ID'];
+                                        $goal = $row['goalName'];
+                                        $note = $row['note'];
+                                        
+                                        ?>
+
+                                        <tr>
+                                        <td><?= $goal ?></td>
+                                        <td><?= $note ?></td>
+                                        <td>
+                                            <button class="remove-goal" type="button" data-goal-id="<?=$goalID?>">
+                                                Remove
+                                            </button>
+                                        </td>
+                                        </tr>
+
+                                        <?php
+                                    }
+                                    
+                                }                                     
+                                else {
+                                    echo("<h4 class='warning' style='margin-bottom: 5px;'>Currently no goals</h4>");
+                                }
+                            } catch (PDOException $ex) {
+                                echo $ex;
+                            }
+                        ?>
                         </tbody>
                     </table>
-                    <a href="#">Show All</a>
                 </div>
-
-                <?php
-                    //include_once('php/webScrape.php');
-                ?>
             </main>
 
             <div class="right">
@@ -173,7 +196,7 @@
 
                 <!-- Budget Content -->
                 <div class="budget-goals">
-                <h2>Learn More</h2>
+                    <h2>Learn More</h2>
                     <div class="card-container">
                         <?php
                         try {
@@ -218,6 +241,10 @@
         </div> 
     </body>
 
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script src="Scripts/colourToggle.js"></script>
+    <script src="Scripts/goal-change.js"></script>
     <!-- <script src="Scripts/accountFunctions.js"></script> -->
 </html>
