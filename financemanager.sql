@@ -234,8 +234,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `password`, `first_name`, `last_name`) VALUES
-(1, 'chiragrana200@yahoo.co.uk', '$2y$10$IjhqO/XQhW15NmZ0e84tMej03tpeTpVP18541UNoGZ7wM2M2APJGq', 'Chi', 'ran'),
-(2, 'rana@gmail.com', '$2y$10$NUOhGxU3twDw8obSidskqung02eEuqTWoH2xl7GvGJllGG0PeOFgG', 'a', 'b');
+(1, 'na200@yahoo.co.uk', '$2y$10$IjhqO/XQhW15NmZ0e84tMej03tpeTpVP18541UNoGZ7wM2M2APJGq', 'hi', 'rn'),
+(2, 'na@gmail.com', '$2y$10$NUOhGxU3twDw8obSidskqung02eEuqTWoH2xl7GvGJllGG0PeOFgG', 'a', 'b');
 
 --
 -- Indexes for dumped tables
